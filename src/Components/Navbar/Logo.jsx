@@ -1,10 +1,11 @@
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useTypewriter } from 'react-simple-typewriter';
 import logo from '../../assets/images/logo.png';
 
-const Logo = () => {
+const Logo = ({ typeText = 'NFH' }) => {
   const [text] = useTypewriter({
-    words: ['NewsForge', 'Hub', 'NFH'],
+    words: ['NewsForge', 'Hub', 'NFH', typeText],
     loop: 1,
   });
   return (
@@ -18,5 +19,7 @@ const Logo = () => {
     </div>
   );
 };
-
+Logo.propTypes = {
+  typeText: PropTypes.string,
+};
 export default Logo;
