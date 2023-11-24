@@ -6,7 +6,7 @@ const CreateLayout = ({ title, children }) => {
     <section>
       {/* login wrapper  */}
       <div className='w-screen h-screen grid justify-center items-center'>
-        <div className='border border-[#E6E6E6] p-12 rounded-lg'>
+        <div className='w-full sm:w-[640px] border border-[#E6E6E6] p-12 rounded-lg'>
           <div className='flex flex-col items-center'>
             <Logo typeText={'NewsForge'} />
             <h1 className='text-2xl'>{title}</h1>

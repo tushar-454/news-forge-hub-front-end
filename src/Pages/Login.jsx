@@ -5,7 +5,7 @@ import CreateLayout from '../Layout/CreateLayout';
 
 const Login = () => {
   return (
-    <CreateLayout title='Sign into NewsForge Hub'>
+    <CreateLayout title='Login NewsForge Hub'>
       <form className='my-10'>
         <Input
           displayName={'Email Address'}
@@ -20,7 +20,7 @@ const Login = () => {
         />
         <Button displayName={'Login'} />
       </form>
-      <p className='text-center'>
+      <p className='font-medium text-center'>
         Don&apos;t Have account.{' '}
         <Link
           to={'/signup'}

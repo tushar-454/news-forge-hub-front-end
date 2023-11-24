@@ -11,7 +11,7 @@ const Logo = ({ typeText = 'NFH' }) => {
   return (
     <div className='flex justify-center items-center'>
       <Link to={'/'}>
-        <img src={logo} alt='Logo' className='w-20' />
+        <img src={logo} alt='Logo' className='imageSpin w-20' />
       </Link>
       <Link to={'/'}>
         <h1 className='text-6xl tracking-[-11px]'>{text}</h1>
