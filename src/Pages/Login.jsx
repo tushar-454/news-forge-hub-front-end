@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import UseAnimations from 'react-useanimations';
+import loading from 'react-useanimations/lib/loading';
 import Button from '../Components/UI/Button';
 import Input from '../Components/UI/Input';
 import useAuth from '../Hook/useAuth';
@@ -20,6 +22,7 @@ const errorInit = {
 const Login = () => {
   const [login, setLogin] = useState({ ...loginInit });
   const [error, setError] = useState({ ...errorInit });
+  const [isLoading, setIsLoading] = useState(false);
   const { loginWithEmailPass } = useAuth();
 
   // handle input change
@@ -84,9 +87,11 @@ const Login = () => {
       }
     }
     try {
+      setIsLoading(true);
       const res = await loginWithEmailPass(email, password);
       if (res.user) {
         toast.success('Account login succssfully.');
+        setIsLoading(false);
       }
     } catch (error) {
       toast.error(error.message);
@@ -115,7 +120,22 @@ const Login = () => {
           onChange={handleInputChange}
           error={error.password}
         />
-        <Button displayName={'Login'} />
+        <Button
+          displayName={
+            isLoading ? (
+              <UseAnimations
+                animation={loading}
+                wrapperStyle={{
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                }}
+              />
+            ) : (
+              'Login'
+            )
+          }
+        />
       </form>
       <LoginWithOther />
       <p className='font-medium text-center'>
