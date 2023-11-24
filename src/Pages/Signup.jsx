@@ -3,6 +3,7 @@ import Button from '../Components/UI/Button';
 import Input from '../Components/UI/Input';
 import InputFile from '../Components/UI/InputFile';
 import CreateLayout from '../Layout/CreateLayout';
+import LoginWithOther from '../Shared/LoginWithOther';
 
 const Signup = () => {
   return (
@@ -41,6 +42,7 @@ const Signup = () => {
         />
         <Button displayName={'Signup'} />
       </form>
+      <LoginWithOther />
       <p className='font-medium text-center'>
         Already Have an account.
         <Link

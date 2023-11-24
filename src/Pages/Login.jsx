@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Button from '../Components/UI/Button';
 import Input from '../Components/UI/Input';
 import CreateLayout from '../Layout/CreateLayout';
+import LoginWithOther from '../Shared/LoginWithOther';
 
 const Login = () => {
   return (
@@ -20,6 +21,7 @@ const Login = () => {
         />
         <Button displayName={'Login'} />
       </form>
+      <LoginWithOther />
       <p className='font-medium text-center'>
         Don&apos;t Have account.{' '}
         <Link
