@@ -9,7 +9,7 @@ const Logo = ({ typeText = 'NFH' }) => {
     loop: 1,
   });
   return (
-    <div className='flex justify-center items-center'>
+    <div className='flex items-center'>
       <Link to={'/'}>
         <img src={logo} alt='Logo' className='imageSpin w-20' />
       </Link>
