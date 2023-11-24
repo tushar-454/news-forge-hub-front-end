@@ -4,6 +4,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .top-18 {
+    top: 70px !important;
+  }
+  .transform-custom {
+    transform-origin: top;
+    transform: perspective(999px) rotateX(-30deg) translateZ(0px)
+      translate3d(0px, 0px, 5px) !important;
+    visibility: hidden;
+    opacity: 0;
+  }
+  .transform-undo {
+    transform: perspective(999px) rotateX(0deg) translateZ(0px)
+      translate3d(0px, 0px, 5px) !important;
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
 body {
   font-family: 'Libre Baskerville', serif;
 }
