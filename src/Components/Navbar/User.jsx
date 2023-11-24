@@ -20,7 +20,7 @@ const User = () => {
           />
         </Link>
         <RxDropdownMenu
-          className={`text-6xl cursor-pointer ${
+          className={`block 2xl:hidden text-6xl cursor-pointer ${
             isUserDropdown ? 'rotate-180' : 'rotate-0'
           } transition-all`}
           onClick={() => setIsUserDropDown(!isUserDropdown)}
