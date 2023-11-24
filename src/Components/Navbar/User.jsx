@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { RxDropdownMenu } from 'react-icons/rx';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { menuItems } from '../../Data/Data';
 import useAuth from '../../Hook/useAuth';
 
@@ -36,20 +36,23 @@ const User = () => {
         <div
           className={`absolute right-0 top-18 py-2 rounded-b-lg transform-custom ${
             isUserDropdown ? 'transform-undo' : undefined
-          } transition-all 2xl:hidden w-52 bg-[#981e4f1a] text-black`}
+          } transition-all 2xl:hidden w-52 bg-[#e6aadaa3] text-black backdrop-blur`}
         >
           <div className='flex flex-col items-end h-full'>
             {menuItems.map((menuItem, index) => (
-              <Link
+              <NavLink
+                to={menuItem.path}
                 onClick={() => setIsUserDropDown(false)}
                 key={index}
-                className='font-medium p-2 px-3 rounded-full hover:bg-white hover:text-[#981E4F] transition'
+                className={`font-medium p-2 px-3 rounded-full hover:bg-white hover:text-[#981E4F] transition ${(
+                  isActive
+                ) => (isActive ? 'active' : undefined)}`}
               >
                 <span className='flex items-center gap-1'>
                   {<menuItem.icon className='mb-1' />}
                   {menuItem.name}
                 </span>
-              </Link>
+              </NavLink>
             ))}
             <Link
               onClick={logOutAccount}

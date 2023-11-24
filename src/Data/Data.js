@@ -15,32 +15,32 @@ const menuItems = [
   },
   {
     name: 'Add Articals',
-    path: '/',
+    path: '/add-articals',
     icon: AiOutlineFileAdd,
   },
   {
     name: 'All Articals',
-    path: '/',
+    path: '/all-articals',
     icon: AiOutlineWallet,
   },
   {
     name: 'Subscriptions',
-    path: '/',
+    path: '/subscriptions',
     icon: FaAmazonPay,
   },
   {
     name: 'Dashboard',
-    path: '/',
+    path: '/dashboard',
     icon: RiDashboardLine,
   },
   {
     name: 'My Articals',
-    path: '/',
+    path: '/my-articals',
     icon: RiArticleLine,
   },
   {
     name: 'Premium Articals',
-    path: '/',
+    path: '/premium-aritcals',
     icon: TbPremiumRights,
   },
 ];

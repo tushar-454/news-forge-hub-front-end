@@ -1,15 +1,24 @@
 import { Link } from 'react-router-dom';
+import UseAnimations from 'react-useanimations';
+import loading from 'react-useanimations/lib/loading';
 import useAuth from '../../Hook/useAuth';
 import Menu from './Menu';
 import User from './User';
 
 const NavItem = () => {
-  const { user, loading } = useAuth();
+  const { user, loading: isLoading } = useAuth();
   return (
     <>
       {!user ? (
-        loading ? (
-          <p>Loading...</p>
+        isLoading ? (
+          <UseAnimations
+            animation={loading}
+            wrapperStyle={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          />
         ) : (
           <div>
             <Link

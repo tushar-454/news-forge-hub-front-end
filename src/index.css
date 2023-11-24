@@ -8,6 +8,9 @@
   .social-icon {
     @apply flex justify-center items-center text-3xl p-2 w-14 h-14 mb-5 bg-slate-100 rounded-md hover:bg-slate-200 transition;
   }
+  .active {
+    @apply text-[#981E4F] bg-white;
+  }
 }
 
 @layer utilities {
