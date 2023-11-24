@@ -19,19 +19,16 @@ const AuthProvider = ({ children }) => {
 
   // login with google
   const loginWithGoogle = () => {
-    setLoading(true);
     return signInWithPopup(Auth, new GoogleAuthProvider());
   };
 
   // signup or crate account with email and password
   const signupWithEmailPassword = (email, password) => {
-    setLoading(true);
     return createUserWithEmailAndPassword(Auth, email, password);
   };
 
   // signin account with email and password
   const loginWithEmailPass = (email, password) => {
-    setLoading(false);
     return signInWithEmailAndPassword(Auth, email, password);
   };
 
@@ -60,6 +57,7 @@ const AuthProvider = ({ children }) => {
   const userInfo = {
     user,
     loading,
+    setLoading,
     loginWithGoogle,
     signupWithEmailPassword,
     loginWithEmailPass,

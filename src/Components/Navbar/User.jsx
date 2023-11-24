@@ -3,9 +3,12 @@ import { AiOutlineLogout } from 'react-icons/ai';
 import { RxDropdownMenu } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
 import { menuItems } from '../../Data/Data';
+import useAuth from '../../Hook/useAuth';
 
 const User = () => {
   const [isUserDropdown, setIsUserDropDown] = useState(false);
+  const { user, logOutAccount } = useAuth();
+
   useEffect(() => {
     window.addEventListener('resize', () => setIsUserDropDown(false));
   }, []);
@@ -15,10 +18,14 @@ const User = () => {
       <div className='h-full relative flex justify-center items-center gap-2'>
         <Link to={'/profile'}>
           <img
-            src='https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png'
-            className='w-16 cursor-pointer'
+            src={user?.photoURL}
+            className='w-14 cursor-pointer rounded-full hover:ring-4 ring-[#FEF2F4] transition'
           />
         </Link>
+        <AiOutlineLogout
+          onClick={logOutAccount}
+          className={`hidden 2xl:block text-5xl cursor-pointer relative hover:left-1 transition`}
+        />
         <RxDropdownMenu
           className={`block 2xl:hidden text-6xl cursor-pointer ${
             isUserDropdown ? 'rotate-180' : 'rotate-0'
@@ -46,7 +53,7 @@ const User = () => {
             ))}
             <Link className='font-medium p-2 px-3 rounded-full hover:bg-white hover:text-[#981E4F] transition'>
               <span className='flex items-center gap-1'>
-                <AiOutlineLogout className='mb-1' />
+                <AiOutlineLogout onClick={logOutAccount} className='mb-1' />
                 Logout
               </span>
             </Link>
