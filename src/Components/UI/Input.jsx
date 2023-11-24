@@ -31,7 +31,7 @@ const Input = ({ id, displayName, type, isPassInput, error, ...rest }) => {
           </p>
         )}
       </div>
-      {error && <p className={``}>{error}</p>}
+      {error && <p className={`my-2 text-red-500 transition`}>{error}</p>}
     </div>
   );
 };
