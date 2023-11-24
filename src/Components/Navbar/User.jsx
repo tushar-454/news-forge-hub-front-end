@@ -1,18 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AiOutlineLogout } from 'react-icons/ai';
+import { RxDropdownMenu } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
 import { menuItems } from '../../Data/Data';
 
 const User = () => {
   const [isUserDropdown, setIsUserDropDown] = useState(false);
+  useEffect(() => {
+    window.addEventListener('resize', () => setIsUserDropDown(false));
+  }, []);
   return (
     <div>
       {/* user image  */}
-      <div className='h-full relative'>
-        <img
+      <div className='h-full relative flex justify-center items-center gap-2'>
+        <Link to={'/profile'}>
+          <img
+            src='https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png'
+            className='w-16 cursor-pointer'
+          />
+        </Link>
+        <RxDropdownMenu
+          className={`text-6xl cursor-pointer ${
+            isUserDropdown ? 'rotate-180' : 'rotate-0'
+          } transition-all`}
           onClick={() => setIsUserDropDown(!isUserDropdown)}
-          src='https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png'
-          className='w-16 cursor-pointer'
         />
         {/* mobile responsive menu Item  */}
         <div
