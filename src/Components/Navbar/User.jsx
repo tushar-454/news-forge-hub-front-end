@@ -34,7 +34,7 @@ const User = () => {
         />
         {/* mobile responsive menu Item  */}
         <div
-          className={`absolute right-0 top-18 py-2 rounded-b-lg transform-custom ${
+          className={`z-50 absolute right-0 top-18 py-2 rounded-b-lg transform-custom ${
             isUserDropdown ? 'transform-undo' : undefined
           } transition-all 2xl:hidden w-52 bg-[#e6aadaa3] text-black backdrop-blur`}
         >
