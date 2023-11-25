@@ -6,11 +6,11 @@ const Statistics = () => {
   const statisticsVal = {
     arr: [
       {
-        count: 200,
+        count: 260,
         category: 'All Users',
       },
       {
-        count: 100,
+        count: 200,
         category: 'Normal user',
       },
       {
@@ -18,11 +18,11 @@ const Statistics = () => {
         category: 'Premium users',
       },
       {
-        count: 400,
+        count: 1024,
         category: 'Articals',
       },
     ],
-    totalUser: 810,
+    totalUser: 1544,
   };
   return (
     <section>
@@ -35,7 +35,7 @@ const Statistics = () => {
               <RadialChart
                 key={index}
                 count={item.count}
-                circleValue={450 - item.count}
+                circleValue={450 - 450 * (item.count / statisticsVal.totalUser)}
                 category={item.category}
               />
             ))}
