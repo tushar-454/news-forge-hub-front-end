@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import AllPublisher from '../Components/AllPublisher/AllPublisher';
 import CategorySlider from '../Components/CategorySlider/CategorySlider';
+import Faq from '../Components/FAQ/FAQ';
 import Plans from '../Components/Plans/Plans';
 import Statistics from '../Components/Statistics/Statistics';
 import SubscribeModal from '../Components/SubscribeModal/SubscribeModal';
@@ -26,6 +27,7 @@ const Home = () => {
       <AllPublisher />
       <Statistics />
       <Plans />
+      <Faq />
       {isShowModal && <SubscribeModal closeFunc={setIsShowModal} />}
     </>
   );
