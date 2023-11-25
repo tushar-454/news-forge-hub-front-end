@@ -93,6 +93,9 @@ label {
 .popup {
   animation: popup 0.3s linear 1;
 }
+.popupModal {
+  animation: popupModal 0.3s linear 1;
+}
 
 @keyframes popup {
   0% {
@@ -104,5 +107,26 @@ label {
     visibility: visible;
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes popupModal {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    transform-origin: center;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+  50% {
+    visibility: visible;
+    opacity: 1;
+    transform-origin: center;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+    transform-origin: center;
+    transform: translate(-50%, -50%) scale(1);
   }
 }
