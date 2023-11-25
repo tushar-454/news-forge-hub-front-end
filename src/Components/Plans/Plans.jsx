@@ -75,7 +75,7 @@ const Plans = () => {
                 reg. ${plan.price}
               </p>
               <Link
-                t0={'/'}
+                to={'/subscriptions'}
                 className={`block mb-8 text-center text-white font-semibold ${
                   plan.planType === 'Enterprise'
                     ? 'bg-[#FFBE63]'
