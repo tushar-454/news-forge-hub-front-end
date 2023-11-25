@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import AllPublisher from '../Components/AllPublisher/AllPublisher';
 import CategorySlider from '../Components/CategorySlider/CategorySlider';
+import Plans from '../Components/Plans/Plans';
 import Statistics from '../Components/Statistics/Statistics';
 import SubscribeModal from '../Components/SubscribeModal/SubscribeModal';
 import TopArticalSlider from '../Components/TopArticalSlider/TopArticalSlider';
@@ -22,8 +23,9 @@ const Home = () => {
       </Helmet>
       <TopArticalSlider />
       <CategorySlider />
-      <Statistics />
       <AllPublisher />
+      <Statistics />
+      <Plans />
       {isShowModal && <SubscribeModal closeFunc={setIsShowModal} />}
     </>
   );
