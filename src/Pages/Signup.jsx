@@ -1,5 +1,6 @@
 /* eslint-disable no-useless-escape */
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import UseAnimations from 'react-useanimations';
@@ -152,6 +153,9 @@ const Signup = () => {
 
   return (
     <CreateLayout title='Signup NewsForge Hub'>
+      <Helmet>
+        <title>Signup | NewsForge Hub</title>
+      </Helmet>
       <form className='my-10' onSubmit={handleSubmit}>
         <Input
           displayName={'Name'}

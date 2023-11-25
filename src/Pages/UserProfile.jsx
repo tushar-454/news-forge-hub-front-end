@@ -1,8 +1,13 @@
+import { Helmet } from 'react-helmet';
+
 const UserProfile = () => {
   return (
-    <div>
+    <section>
+      <Helmet>
+        <title>Profile | NewsForge Hub</title>
+      </Helmet>
       <h1>This is a user profile section</h1>
-    </div>
+    </section>
   );
 };
 
