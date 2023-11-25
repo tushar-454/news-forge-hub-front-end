@@ -11,6 +11,18 @@
   .active {
     @apply text-[#981E4F] bg-white;
   }
+  .skill {
+    @apply w-40 h-40 relative;
+  }
+  .outer {
+    @apply w-40 h-40 border rounded-full p-5 shadow-outerShadow;
+  }
+  .inner {
+    @apply w-30 h-30 border rounded-full shadow-innerShadow flex justify-center items-center;
+  }
+  .circle {
+    @apply fill-none stroke-[url(#GradientColor)] stroke-[20px];
+  }
 }
 
 @layer utilities {
@@ -29,6 +41,12 @@
       translate3d(0px, 0px, 5px) !important;
     visibility: visible;
     opacity: 1;
+  }
+  .h-30 {
+    height: 120px;
+  }
+  .w-30 {
+    width: 120px;
   }
 }
 
@@ -65,5 +83,15 @@ label {
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
+  }
+}
+
+:root {
+  --my-statistic-number: 450;
+}
+
+@keyframes circleFill {
+  100% {
+    stroke-dashoffset: var(--my-statistic-number);
   }
 }
