@@ -32,9 +32,11 @@ const ProfileModal = ({ closeFunc }) => {
         const imageData = await imageUpload(e.target.photoUrl.files[0]);
         await updateUserProfile(name, imageData?.data?.display_url);
         toast.success('Profile update successfully.');
+        closeFunc(false);
       } else {
         await updateUserProfile(name, user?.photoURL);
         toast.success('Profile update successfully.');
+        closeFunc(false);
       }
     } catch (error) {
       toast.error(error.message);
