@@ -19,7 +19,7 @@ const User = () => {
         <Link to={'/profile'}>
           <img
             src={user?.photoURL}
-            className='w-14 cursor-pointer rounded-full hover:ring-4 ring-[#FEF2F4] transition'
+            className='w-14 h-14 object-cover cursor-pointer rounded-full hover:ring-4 ring-[#FEF2F4] transition'
           />
         </Link>
         <AiOutlineLogout

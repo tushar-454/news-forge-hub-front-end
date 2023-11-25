@@ -27,7 +27,7 @@ const UserProfile = () => {
                     <img
                       src={user?.photoURL}
                       alt='user photo'
-                      className='w-32 h-32 rounded-full border-4 border-white'
+                      className='w-32 h-32 object-cover rounded-full border-4 border-white'
                     />
                     <h1 className='text-3xl my-3'>{user?.displayName}</h1>
                     <small className='text-center my-3'>UID: {user?.uid}</small>
