@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import UseAnimations from 'react-useanimations';
 import loading from 'react-useanimations/lib/loading';
 import useAuth from '../Hook/useAuth';
 
 const PrivateRoutes = ({ children }) => {
   const { user, loading: isLoading } = useAuth();
+  const { pathname } = useLocation();
   if (isLoading) {
     return (
       <p>
@@ -21,7 +22,7 @@ const PrivateRoutes = ({ children }) => {
     );
   }
   if (!user) {
-    return <Navigate to={'/login'} />;
+    return <Navigate to={'/login'} state={pathname} />;
   }
   return children;
 };

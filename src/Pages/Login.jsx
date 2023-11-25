@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import UseAnimations from 'react-useanimations';
 import loading from 'react-useanimations/lib/loading';
 import Button from '../Components/UI/Button';
@@ -26,7 +26,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { loginWithEmailPass } = useAuth();
   const navigate = useNavigate();
-  const { state } = useParams();
+  const { state } = useLocation();
 
   // handle input change
   const handleInputChange = (e) => {

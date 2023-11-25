@@ -2,13 +2,14 @@ import toast from 'react-hot-toast';
 import { AiFillTwitterCircle } from 'react-icons/ai';
 import { FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../Hook/useAuth';
 
 const LoginWithOther = () => {
   const { loginWithGoogle } = useAuth();
   const navigate = useNavigate();
-  const { state } = useParams();
+  const { state } = useLocation();
+
   const handleGoogleLogin = async () => {
     try {
       await loginWithGoogle();
