@@ -20,7 +20,7 @@ const PublicRoutes = ({ children }) => {
       </p>
     );
   }
-  if (user && !loading) {
+  if (user) {
     return <Navigate to={'/'} />;
   }
   return children;

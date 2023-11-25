@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-escape */
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import UseAnimations from 'react-useanimations';
 import loading from 'react-useanimations/lib/loading';
 import { imageUpload } from '../Api/utils';
@@ -33,6 +33,8 @@ const Signup = () => {
   const [photoStatus, setPhotoStatus] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { signupWithEmailPassword, updateUserProfile } = useAuth();
+  const navigate = useNavigate();
+  const { state } = useParams();
 
   // handle input change
   const handleInputChange = (e) => {
@@ -139,6 +141,7 @@ const Signup = () => {
       if (res.user) {
         await updateUserProfile(name, imageData?.data?.display_url);
         toast.success('Account create successfully.');
+        navigate(state || '/');
       }
     } catch (error) {
       toast.error(error.message);

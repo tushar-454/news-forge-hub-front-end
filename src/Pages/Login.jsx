@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-escape */
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import UseAnimations from 'react-useanimations';
 import loading from 'react-useanimations/lib/loading';
 import Button from '../Components/UI/Button';
@@ -24,6 +24,8 @@ const Login = () => {
   const [error, setError] = useState({ ...errorInit });
   const [isLoading, setIsLoading] = useState(false);
   const { loginWithEmailPass } = useAuth();
+  const navigate = useNavigate();
+  const { state } = useParams();
 
   // handle input change
   const handleInputChange = (e) => {
@@ -92,6 +94,7 @@ const Login = () => {
       if (res.user) {
         toast.success('Account login succssfully.');
         setIsLoading(false);
+        navigate(state || '/');
       }
     } catch (error) {
       toast.error(error.message);
