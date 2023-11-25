@@ -29,15 +29,17 @@ const Statistics = () => {
       <Container>
         <SectionTitle>Our Statistics</SectionTitle>
         {/* Statistics wrapper  */}
-        <div className='grid gap-28 justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-4 mb-32'>
-          {statisticsVal.arr.map((item, index) => (
-            <RadialChart
-              key={index}
-              count={item.count}
-              circleValue={450 - item.count}
-              category={item.category}
-            />
-          ))}
+        <div className=' flex justify-center'>
+          <div className='w-full lg:w-[50rem] grid gap-28 justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-4 mb-32'>
+            {statisticsVal.arr.map((item, index) => (
+              <RadialChart
+                key={index}
+                count={item.count}
+                circleValue={450 - item.count}
+                category={item.category}
+              />
+            ))}
+          </div>
         </div>
       </Container>
     </section>

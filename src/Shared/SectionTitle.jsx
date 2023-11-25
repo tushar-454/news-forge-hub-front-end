@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 const SectionTitle = ({ children }) => {
   return (
     <div>
-      <h1 className='text-4xl text-center my-10 font-bold'>{children}</h1>
+      <h1 className='text-4xl text-center my-10 font-bold underline underline-offset-4'>
+        {children}
+      </h1>
     </div>
   );
 };

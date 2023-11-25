@@ -14,7 +14,7 @@ const SubscribeModal = ({ closeFunc }) => {
           className='absolute top-2 right-2 cursor-pointer text-3xl text-black hover:scale-125 active:scale-100 transition'
         />
         <h1 className='text-black font-semibold text-3xl text-center'>
-          Subscribe our premium plan for tranding articals
+          Subscribe our premium plan for tranding premium articals
         </h1>
         <div>
           <Input placeholder={'enter your email'} id={'eamil'} />
