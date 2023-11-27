@@ -1,6 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
+import Dashboard from '../Layout/Dashboard';
 import Root from '../Layout/Root';
 import AddArticles from '../Pages/AddArticles';
+import AddPublications from '../Pages/AddPublications';
 import AllArticles from '../Pages/AllArticles';
 import Error from '../Pages/Error';
 import Home from '../Pages/Home';
@@ -70,6 +72,24 @@ const routes = createBrowserRouter([
             <PremiumArticles />
           </PrivateRoutes>
         ),
+      },
+      {
+        path: 'dashboard',
+        element: (
+          <PrivateRoutes>
+            <Dashboard />
+          </PrivateRoutes>
+        ),
+        children: [
+          {
+            path: 'add-publications',
+            element: (
+              <PrivateRoutes>
+                <AddPublications />
+              </PrivateRoutes>
+            ),
+          },
+        ],
       },
     ],
   },
