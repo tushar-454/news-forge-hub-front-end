@@ -4,15 +4,29 @@ import { FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../Hook/useAuth';
+import useAxios from '../Hook/useAxios';
 
 const LoginWithOther = () => {
   const { loginWithGoogle } = useAuth();
   const navigate = useNavigate();
   const { state } = useLocation();
+  const axios = useAxios();
 
   const handleGoogleLogin = async () => {
     try {
-      await loginWithGoogle();
+      const { user } = await loginWithGoogle();
+      console.log(user.email);
+      const tokenPayload = {
+        email: user?.email,
+        role: 'USER',
+        isPremium: false,
+        premiumTill: null,
+      };
+      axios.post('/jwt/token', tokenPayload);
+      axios.post('/users', {
+        name: user?.displayName,
+        email: user?.email,
+      });
       toast.success('Login successfully');
       navigate(state || '/');
     } catch (error) {

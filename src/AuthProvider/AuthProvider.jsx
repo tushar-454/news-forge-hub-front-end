@@ -11,12 +11,14 @@ import PropTypes from 'prop-types';
 import { createContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import Auth from '../Config/firebase-config';
+import useAxios from '../Hook/useAxios';
 
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const axios = useAxios();
 
   // login with google
   const loginWithGoogle = () => {
@@ -45,7 +47,10 @@ const AuthProvider = ({ children }) => {
   const logOutAccount = () => {
     setLoading(false);
     signOut(Auth)
-      .then(() => toast.success('Logout successfull'))
+      .then(() => {
+        toast.success('Logout successfull');
+        axios.post('/jwt/token-remove', {});
+      })
       .catch((error) => toast.error(error.message));
   };
 

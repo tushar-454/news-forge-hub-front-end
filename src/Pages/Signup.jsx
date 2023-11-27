@@ -10,6 +10,7 @@ import Button from '../Components/UI/Button';
 import Input from '../Components/UI/Input';
 import InputFile from '../Components/UI/InputFile';
 import useAuth from '../Hook/useAuth';
+import useAxios from '../Hook/useAxios';
 import CreateLayout from '../Layout/CreateLayout';
 import LoginWithOther from '../Shared/LoginWithOther';
 
@@ -36,6 +37,7 @@ const Signup = () => {
   const { signupWithEmailPassword, updateUserProfile } = useAuth();
   const navigate = useNavigate();
   const { state } = useParams();
+  const axios = useAxios();
 
   // handle input change
   const handleInputChange = (e) => {
@@ -141,6 +143,17 @@ const Signup = () => {
       const res = await signupWithEmailPassword(email, password);
       if (res.user) {
         await updateUserProfile(name, imageData?.data?.display_url);
+        const tokenPayload = {
+          email: res.user?.email,
+          role: 'USER',
+          isPremium: false,
+          premiumTill: null,
+        };
+        axios.post('/jwt/token', tokenPayload);
+        axios.post('/users', {
+          name: res.user?.displayName,
+          email: res.user?.email,
+        });
         toast.success('Account create successfully.');
         navigate(state || '/');
       }
