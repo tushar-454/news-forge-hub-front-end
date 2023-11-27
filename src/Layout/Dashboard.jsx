@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { SlArrowRight } from 'react-icons/sl';
 import { Outlet } from 'react-router-dom';
+import AdminMenuList from '../Components/Dashboard/AdminMenuList';
 import UserMenuList from '../Components/Dashboard/UserMenuList';
 import useAuth from '../Hook/useAuth';
+import useUserInfo from '../Hook/useUserInfo';
 
 const Dashboard = () => {
   const { user } = useAuth();
+  const { userInfo, isLoading } = useUserInfo();
   const [isCollapse, setIsCollapse] = useState(false);
-
   useEffect(() => {
     window.addEventListener('resize', () => {
       if (window.screen.width < 1280) {
@@ -28,7 +30,7 @@ const Dashboard = () => {
         <div className='block xl:hidden'>
           <div
             onClick={() => setIsCollapse(!isCollapse)}
-            className={`absolute top-0 -right-16 w-16 h-16 bg-slate-300 rounded-r-full flex justify-center items-center`}
+            className={`absolute top-0 -right-16 w-16 h-16 bg-slate-300 rounded-r-full flex justify-center items-center cursor-pointer`}
           >
             <SlArrowRight
               className={`text-4xl ${
@@ -46,7 +48,11 @@ const Dashboard = () => {
           <h1 className='text-2xl font-medium my-3'>{user?.displayName}</h1>
         </div>
         {/* show all action routes here */}
-        <UserMenuList />
+        {isLoading || (
+          <>
+            {userInfo.role === 'ADMIN' ? <AdminMenuList /> : <UserMenuList />}
+          </>
+        )}
       </aside>
       <div className='w-full xl:w-4/5 bg-slate-100 pt-20'>
         <Outlet />

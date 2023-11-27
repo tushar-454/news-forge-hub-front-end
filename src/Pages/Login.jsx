@@ -8,6 +8,7 @@ import loading from 'react-useanimations/lib/loading';
 import Button from '../Components/UI/Button';
 import Input from '../Components/UI/Input';
 import useAuth from '../Hook/useAuth';
+import useAxios from '../Hook/useAxios';
 import CreateLayout from '../Layout/CreateLayout';
 import LoginWithOther from '../Shared/LoginWithOther';
 
@@ -27,6 +28,7 @@ const Login = () => {
   const { loginWithEmailPass } = useAuth();
   const navigate = useNavigate();
   const { state } = useLocation();
+  const axios = useAxios();
 
   // handle input change
   const handleInputChange = (e) => {
@@ -95,6 +97,14 @@ const Login = () => {
       if (res.user) {
         toast.success('Account login succssfully.');
         setIsLoading(false);
+        const tokenPayload = {
+          email: email,
+          role: 'USER',
+          isPremium: false,
+          premiumTill: null,
+        };
+        axios.post('/jwt/token', tokenPayload);
+        axios.post('/users', { name: res.user.displayName, email: email });
         navigate(state || '/');
       }
     } catch (error) {

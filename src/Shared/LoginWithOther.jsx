@@ -14,21 +14,22 @@ const LoginWithOther = () => {
 
   const handleGoogleLogin = async () => {
     try {
-      const { user } = await loginWithGoogle();
-      console.log(user.email);
-      const tokenPayload = {
-        email: user?.email,
-        role: 'USER',
-        isPremium: false,
-        premiumTill: null,
-      };
-      axios.post('/jwt/token', tokenPayload);
-      axios.post('/users', {
-        name: user?.displayName,
-        email: user?.email,
-      });
-      toast.success('Login successfully');
-      navigate(state || '/');
+      const res = await loginWithGoogle();
+      if (res) {
+        const tokenPayload = {
+          email: res?.user?.email,
+          role: 'USER',
+          isPremium: false,
+          premiumTill: null,
+        };
+        axios.post('/jwt/token', tokenPayload);
+        axios.post('/users', {
+          name: res?.user?.displayName,
+          email: res?.user?.email,
+        });
+        toast.success('Login successfully');
+        navigate(state || '/');
+      }
     } catch (error) {
       toast.error(error.message);
     }
