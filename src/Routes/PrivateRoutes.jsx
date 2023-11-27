@@ -9,16 +9,14 @@ const PrivateRoutes = ({ children }) => {
   const { pathname } = useLocation();
   if (isLoading) {
     return (
-      <p>
-        <UseAnimations
-          animation={loading}
-          wrapperStyle={{
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-          }}
-        />
-      </p>
+      <UseAnimations
+        animation={loading}
+        wrapperStyle={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      />
     );
   }
   if (!user) {

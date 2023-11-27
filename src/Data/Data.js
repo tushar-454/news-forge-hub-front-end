@@ -14,13 +14,13 @@ const menuItems = [
     icon: AiOutlineHome,
   },
   {
-    name: 'Add Articals',
-    path: '/add-articals',
+    name: 'Add Articles',
+    path: '/add-articles',
     icon: AiOutlineFileAdd,
   },
   {
-    name: 'All Articals',
-    path: '/all-articals',
+    name: 'All Articles',
+    path: '/all-articles',
     icon: AiOutlineWallet,
   },
   {
@@ -34,13 +34,13 @@ const menuItems = [
     icon: RiDashboardLine,
   },
   {
-    name: 'My Articals',
-    path: '/my-articals',
+    name: 'My Articles',
+    path: '/my-articles',
     icon: RiArticleLine,
   },
   {
-    name: 'Premium Articals',
-    path: '/premium-aritcals',
+    name: 'Premium Articles',
+    path: '/premium-articles',
     icon: TbPremiumRights,
   },
 ];

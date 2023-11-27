@@ -13,7 +13,7 @@ const Input = ({ id, displayName, type, isPassInput, error, ...rest }) => {
         <input
           id={id}
           type={isPassHide ? 'text' : type}
-          className={`w-full outline-none border border-transparent bg-[#f1f1f1] text-[#747474] text-lg p-4 rounded-lg focus:border-[#c1c1c1] transition ${
+          className={`w-full outline-none border border-transparent bg-[#f9f9f9] text-[#747474] text-lg p-4 rounded-lg focus:border-[#c1c1c1] transition ${
             isPassInput ? 'pr-10' : undefined
           }`}
           {...rest}
