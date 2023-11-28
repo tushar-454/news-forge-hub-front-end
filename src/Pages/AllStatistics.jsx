@@ -1,8 +1,10 @@
+import PageTitle from '../Shared/PageTitle';
+
 const AllStatistics = () => {
   return (
-    <div>
-      <h1>THis is a admin statistti cpage</h1>
-    </div>
+    <section>
+      <PageTitle>Statistics</PageTitle>
+    </section>
   );
 };
 
