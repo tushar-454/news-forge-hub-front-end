@@ -6,13 +6,22 @@ import PageTitle from '../Shared/PageTitle';
 
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import UseAnimations from 'react-useanimations';
+import loading from 'react-useanimations/lib/loading';
 import { imageUpload } from '../Api/utils';
 import Button from '../Components/UI/Button';
 import Tags from '../Data/Tags';
+import useAuth from '../Hook/useAuth';
+import useAxios from '../Hook/useAxios';
+import usePublications from '../Hook/usePublications';
 
 const AddArticles = () => {
   const [photoStatus, setPhotoStatus] = useState('Upload your photo');
   const [tags, setTags] = useState([]);
+  const { publications, isLoading, isError } = usePublications();
+  const axios = useAxios();
+  const user = useAuth();
+  const [isLoad, setIsLoad] = useState(false);
 
   //handle select change
   const handleSelectChange = (selected) => {
@@ -29,34 +38,51 @@ const AddArticles = () => {
   // handle form submit
   const handleAddArticle = async (e) => {
     e.preventDefault();
-    const form = e.target;
-    const title = form.title.value;
-    const imageFile = form.articleImage.files[0];
-    const publication = form.publication.value;
-    const description = form.description.value;
-    if (
-      !title ||
-      !imageFile ||
-      !publication ||
-      !description ||
-      tags.length === 0
-    ) {
-      return toast.error('Please fillup all input box.');
-    }
-    const res = await imageUpload();
-    const image = res?.data?.display_url;
+    try {
+      setIsLoad(true);
+      const form = e.target;
+      const title = form.title.value;
+      const imageFile = form.articleImage.files[0];
+      const publication = form.publication.value;
+      const description = form.description.value;
+      if (
+        !title ||
+        !imageFile ||
+        !publication ||
+        !description ||
+        tags.length === 0
+      ) {
+        return toast.error('Please fillup all input box.');
+      }
+      const image = await imageUpload(imageFile);
 
-    if (!title || !image || !publication || !description || tags.length === 0) {
-      return toast.error('Please fillup all input box.');
+      if (
+        !title ||
+        !image ||
+        !publication ||
+        !description ||
+        tags.length === 0
+      ) {
+        return toast.error('Please fillup all input box.');
+      }
+      const articleData = {
+        title,
+        image,
+        publication,
+        tags,
+        description,
+        email: user?.email,
+      };
+      const res = await axios.post('/articles/add-article', articleData);
+      if (res.data.message) {
+        toast.success('Article added successfully. Please wait for approve');
+        form.reset();
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoad(false);
     }
-    const articleData = {
-      title,
-      image,
-      publication,
-      tags,
-      description,
-    };
-    console.log(articleData);
   };
   return (
     <section>
@@ -94,8 +120,16 @@ const AddArticles = () => {
                 className='border p-4 rounded-lg outline-none w-full text-lg'
               >
                 <option value=''>Choose your publication</option>
-                <option value='dsfs'>A4Tech</option>
-                <option value=''>Apple</option>
+                {isError && (
+                  <option value={''}>There was an error. Reload</option>
+                )}
+                {!isLoading &&
+                  !isError &&
+                  publications.map((publication, index) => (
+                    <option key={index} value={publication.publicationName}>
+                      {publication.publicationName}
+                    </option>
+                  ))}
               </select>
             </div>
             {/* react multiselect for tags  */}
@@ -133,7 +167,22 @@ const AddArticles = () => {
               placeholder='In recent years, artificial intelligence (AI) has emerged as a transformative force in healthcare, revolutionizing the industry in profound ways. AI applications, powered by machine learning algorithms and data analytics'
             ></textarea>
           </div>
-          <Button displayName={'Add Articles'} />
+          <Button
+            displayName={
+              isLoad ? (
+                <UseAnimations
+                  animation={loading}
+                  wrapperStyle={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                  }}
+                />
+              ) : (
+                'Add Articles'
+              )
+            }
+          />
         </form>
       </Container>
     </section>
