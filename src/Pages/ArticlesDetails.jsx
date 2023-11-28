@@ -13,7 +13,14 @@ const ArticlesDetails = () => {
       return res.data;
     },
   });
-
+  // eslint-disable-next-line no-unused-vars
+  const { data } = useQuery({
+    queryKey: ['updateCount'],
+    queryFn: async () => {
+      const res = await axios.put(`articles/${params.id}`);
+      return res.data;
+    },
+  });
   return (
     <section>
       <Container>
