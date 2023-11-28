@@ -20,9 +20,8 @@ const AddArticles = () => {
   const [tags, setTags] = useState([]);
   const { publications, isLoading, isError } = usePublications();
   const axios = useAxios();
-  const user = useAuth();
+  const { user } = useAuth();
   const [isLoad, setIsLoad] = useState(false);
-
   //handle select change
   const handleSelectChange = (selected) => {
     const selectTags = selected.map((tag) => tag.value);
