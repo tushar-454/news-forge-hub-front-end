@@ -115,7 +115,6 @@ const Articles = () => {
                 <p>{article.description.slice(0, 111)}</p>
                 <Link to={`articles/${article._id}`}>
                   <button
-                    disabled={article.isPremium === 'Approved' ? true : false}
                     className={`inline-block mt-6 bg-pink-400 text-white
                     font-medium p-3 rounded-lg ${
                       article.isPremium === 'Approved'

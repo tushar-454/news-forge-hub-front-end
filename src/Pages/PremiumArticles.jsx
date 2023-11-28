@@ -23,7 +23,10 @@ const PremiumArticles = () => {
               <div
                 key={index}
                 className={`${
-                  article.isPremium === 'Approved' ? 'block' : 'hidden'
+                  article.isApprove === 'Approved' &&
+                  article.isPremium === 'Approved'
+                    ? 'block'
+                    : 'hidden'
                 } p-5 border rounded-lg bg-[${
                   color[Math.floor(Math.random() * color.length)]
                 }] relative`}
@@ -54,7 +57,7 @@ const PremiumArticles = () => {
                   Publication: {article.publication}
                 </h2>
                 <p>{article.description.slice(0, 111)}</p>
-                <Link to={`articles/${article._id}`}>
+                <Link to={`/all-articles/articles/${article._id}`}>
                   <button
                     disabled={article.isPremium === 'Approved' ? false : true}
                     className={`inline-block mt-6 bg-pink-400 text-white
