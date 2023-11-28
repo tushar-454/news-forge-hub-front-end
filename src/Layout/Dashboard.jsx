@@ -23,7 +23,7 @@ const Dashboard = () => {
   return (
     <div className='flex relative'>
       <aside
-        className={`w-[374px] absolute xl:static border-r xl:border-none min-h-screen bg-white transition-all ${
+        className={`z-50 w-[374px] absolute xl:static border-r xl:border-none min-h-screen bg-white transition-all ${
           isCollapse ? 'translate-x-[-23.5rem]' : 'translate-x-0'
         }`}
       >
@@ -58,7 +58,7 @@ const Dashboard = () => {
           <UserMenuList />
         )}
       </aside>
-      <div className='w-full xl:w-4/5 bg-slate-100 pt-20'>
+      <div className='w-full min-h-screen xl:h-auto xl:w-4/5 flex-grow bg-slate-100'>
         <Outlet />
       </div>
     </div>

@@ -1,11 +1,13 @@
-import axios from 'axios';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { storage } from '../Config/firebase-config';
 
 export const imageUpload = async (image) => {
-  const formData = new FormData();
-  formData.append('image', image);
-  const { data } = await axios.post(
-    `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`,
-    formData
-  );
-  return data;
+  const imageName = image.name;
+  const random = new Date().getTime();
+  const path = `images/${random}_${imageName}`;
+  const imagesRef = ref(storage, path);
+  await uploadBytes(imagesRef, image);
+  const url = await getDownloadURL(ref(storage, path));
+
+  return url;
 };
