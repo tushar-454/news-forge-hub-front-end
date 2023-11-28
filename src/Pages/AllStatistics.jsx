@@ -1,4 +1,5 @@
 import { Chart } from 'react-google-charts';
+import { Helmet } from 'react-helmet';
 import useAdminStatistics from '../Hook/useAdminStatistics';
 import PageTitle from '../Shared/PageTitle';
 
@@ -16,6 +17,9 @@ const AllStatistics = () => {
   }
   return (
     <section>
+      <Helmet>
+        <title>Statistics | NewsForge Hub</title>
+      </Helmet>
       <PageTitle>Statistics</PageTitle>
       <div>
         <div>

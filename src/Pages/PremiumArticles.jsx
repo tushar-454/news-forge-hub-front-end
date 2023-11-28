@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import color from '../Data/Colors';
@@ -10,6 +11,9 @@ const PremiumArticles = () => {
   const { allArticles, isLoading, isError } = useArticles();
   return (
     <section>
+      <Helmet>
+        <title>Premium Articles | NewsForge Hub</title>
+      </Helmet>
       <SectionTitle>Premium Articles</SectionTitle>
       <Container>
         {/* all premum article div grid  */}

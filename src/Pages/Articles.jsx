@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import Button from '../Components/UI/Button';
@@ -21,6 +22,9 @@ const Articles = () => {
   };
   return (
     <section>
+      <Helmet>
+        <title>Aticles | NewsForge Hub</title>
+      </Helmet>
       <Container>
         <SectionTitle>All Articles</SectionTitle>
         {/* search divition  */}

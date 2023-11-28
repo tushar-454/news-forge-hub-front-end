@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
 import useArticles from '../Hook/useArticles';
 import PageTitle from '../Shared/PageTitle';
@@ -6,6 +7,9 @@ const AllArticles = () => {
   const { allArticles, isLoading, isError } = useArticles();
   return (
     <div>
+      <Helmet>
+        <title>All Articles | NewsForge Hub</title>
+      </Helmet>
       <PageTitle>All Articles</PageTitle>
       {/* all article tables  */}
       <div className='overflow-auto'>

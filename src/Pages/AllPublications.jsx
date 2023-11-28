@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
 import UseAnimations from 'react-useanimations';
 import loading from 'react-useanimations/lib/loading';
@@ -48,6 +49,9 @@ const AllPublications = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>All Publications | NewsForge Hub</title>
+      </Helmet>
       <PageTitle>All Publications</PageTitle>
       {/* all publication tables  */}
       <div className='overflow-auto'>

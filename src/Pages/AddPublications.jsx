@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
 import UseAnimations from 'react-useanimations';
 import loading from 'react-useanimations/lib/loading';
@@ -63,6 +64,9 @@ const AddPublications = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Add Publications | NewsForge Hub</title>
+      </Helmet>
       <PageTitle>Add Publication</PageTitle>
       <div className='flex justify-center items-center my-10'>
         <form

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import Button from '../Components/UI/Button';
 import Container from '../Shared/Container';
@@ -24,6 +25,9 @@ const Subscriptions = () => {
   };
   return (
     <section>
+      <Helmet>
+        <title>Subscriptions | NewsForge Hub</title>
+      </Helmet>
       <img src={banner} className='w-full' />
       <Container>
         <SectionTitle>Subscriptions</SectionTitle>

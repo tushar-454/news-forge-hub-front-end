@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import color from '../Data/Colors';
@@ -9,6 +10,9 @@ const MyArticles = () => {
   const { userArticles, isLoading, isError } = useUserArticles();
   return (
     <div>
+      <Helmet>
+        <title>My Articles | NewsForge Hub</title>
+      </Helmet>
       <PageTitle>All Articles</PageTitle>
       {/* all article div grid  */}
       <div className='grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-10'>

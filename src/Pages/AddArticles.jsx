@@ -5,6 +5,7 @@ import Container from '../Shared/Container';
 import PageTitle from '../Shared/PageTitle';
 
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
 import UseAnimations from 'react-useanimations';
 import loading from 'react-useanimations/lib/loading';
@@ -85,6 +86,9 @@ const AddArticles = () => {
   };
   return (
     <section>
+      <Helmet>
+        <title>Add Articles | NewsForge Hub</title>
+      </Helmet>
       <PageTitle>Add Articles</PageTitle>
       <Container>
         <form

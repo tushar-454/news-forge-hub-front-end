@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 import useAxios from '../Hook/useAxios';
 import Container from '../Shared/Container';
@@ -23,6 +24,9 @@ const ArticlesDetails = () => {
   });
   return (
     <section>
+      <Helmet>
+        <title>{articlesDetails.title} | NewsForge Hub</title>
+      </Helmet>
       <Container>
         <div className='w-full lg:w-2/3 mx-auto my-10'>
           {!isLoading && (

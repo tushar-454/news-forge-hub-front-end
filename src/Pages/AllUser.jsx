@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
 import useAllUser from '../Hook/useAllUser';
 import useAxios from '../Hook/useAxios';
@@ -45,6 +46,9 @@ const AllUser = () => {
 
   return (
     <section>
+      <Helmet>
+        <title>All Users | NewsForge Hub</title>
+      </Helmet>
       <PageTitle>All Users</PageTitle>
       {/* all users tables  */}
       <div className='overflow-auto'>
