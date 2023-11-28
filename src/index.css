@@ -23,6 +23,12 @@
   .circle {
     @apply fill-none stroke-[url(#GradientColor)] stroke-[20px];
   }
+  .tableTd {
+    @apply p-2 font-medium text-lg border border-white;
+  }
+  .tableTh {
+    @apply p-2 font-semibold text-xl border border-white;
+  }
 }
 
 @layer utilities {

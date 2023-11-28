@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import UseAnimations from 'react-useanimations';
+import loading from 'react-useanimations/lib/loading';
 import { imageUpload } from '../Api/utils';
 import Button from '../Components/UI/Button';
 import Input from '../Components/UI/Input';
@@ -12,6 +14,8 @@ const AddPublications = () => {
   const [photoStatus, setPhotoStatus] = useState(
     'Upload your Publication Logo'
   );
+  const [isLoad, setIsLoad] = useState(false);
+
   //handle photo upload change
   const handleImageUpload = (e) => {
     const imageName = e.target.files[0].name.slice(0, -4);
@@ -20,33 +24,40 @@ const AddPublications = () => {
 
   const handleAddPublicaton = async (e) => {
     e.preventDefault();
-    const form = e.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const imageFile = form.publicationImg.files[0];
-    if (!name || !imageFile || !email) {
-      return toast.error('Please fillup all input box.');
-    }
-    const image = await imageUpload(imageFile);
+    try {
+      setIsLoad(true);
+      const form = e.target;
+      const name = form.name.value;
+      const email = form.email.value;
+      const imageFile = form.publicationImg.files[0];
+      if (!name || !imageFile || !email) {
+        return toast.error('Please fillup all input box.');
+      }
+      const image = await imageUpload(imageFile);
 
-    if (!name || !image || !email) {
-      return toast.error('Please fillup all input box.');
-    }
-    const publicationInfo = {
-      publicationEmail: email,
-      publicationName: name,
-      publicationLogo: image,
-    };
-    const res = await axios.post(`admin/addPublication`, publicationInfo);
-    if (res.data.error) {
-      return toast.error('Publications Already exists.');
-    }
-    if (res.status === 200) {
-      toast.success('Successfully Added');
-      form.reset();
-      setPhotoStatus('Upload your Publication Logo');
-    } else {
-      toast.error('There was an error.');
+      if (!name || !image || !email) {
+        return toast.error('Please fillup all input box.');
+      }
+      const publicationInfo = {
+        publicationEmail: email,
+        publicationName: name,
+        publicationLogo: image,
+      };
+      const res = await axios.post(`admin/addPublication`, publicationInfo);
+      if (res.data.error) {
+        return toast.error('Publications Already exists.');
+      }
+      if (res.status === 200) {
+        toast.success('Successfully Added');
+        form.reset();
+        setPhotoStatus('Upload your Publication Logo');
+      } else {
+        toast.error('There was an error.');
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoad(false);
     }
   };
 
@@ -78,7 +89,22 @@ const AddPublications = () => {
             id={'publicatonImg'}
             name={'publicationImg'}
           />
-          <Button displayName={'Add Publication'} />
+          <Button
+            displayName={
+              isLoad ? (
+                <UseAnimations
+                  animation={loading}
+                  wrapperStyle={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                  }}
+                />
+              ) : (
+                'Add Publication'
+              )
+            }
+          />
         </form>
       </div>
     </div>
