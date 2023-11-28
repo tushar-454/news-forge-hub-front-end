@@ -1,29 +1,13 @@
+import useArticles from '../../Hook/useArticles';
+import useUserStatistics from '../../Hook/useUserStatistics';
 import Container from '../../Shared/Container';
 import SectionTitle from '../../Shared/SectionTitle';
 import RadialChart from './RadialChart';
 
 const Statistics = () => {
-  const statisticsVal = {
-    arr: [
-      {
-        count: 260,
-        category: 'All Users',
-      },
-      {
-        count: 200,
-        category: 'Normal user',
-      },
-      {
-        count: 60,
-        category: 'Premium users',
-      },
-      {
-        count: 1024,
-        category: 'Articals',
-      },
-    ],
-    totalUser: 1544,
-  };
+  const { userStatistics, userStatisticsLoad } = useUserStatistics();
+  const { allArticles, isLoading } = useArticles();
+
   return (
     <section>
       <Container>
@@ -31,14 +15,27 @@ const Statistics = () => {
         {/* Statistics wrapper  */}
         <div className=' flex justify-center'>
           <div className='w-full lg:w-[50rem] grid gap-28 justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-4 mb-32'>
-            {statisticsVal.arr.map((item, index) => (
-              <RadialChart
-                key={index}
-                count={item.count}
-                circleValue={450 - 450 * (item.count / statisticsVal.totalUser)}
-                category={item.category}
-              />
-            ))}
+            <RadialChart
+              count={userStatistics.totalUser}
+              circleValue={450 - 450}
+              category={'All user'}
+            />
+            {!userStatisticsLoad &&
+              userStatistics.usersStatistics.map((item, index) => (
+                <RadialChart
+                  key={index}
+                  count={item.count}
+                  circleValue={
+                    450 - 450 * (item.count / userStatistics.totalUser)
+                  }
+                  category={item.isPremium ? 'Premium users' : 'Normal user'}
+                />
+              ))}
+            <RadialChart
+              count={!isLoading && allArticles.length}
+              circleValue={450 - 450}
+              category={'All Articles'}
+            />
           </div>
         </div>
       </Container>
