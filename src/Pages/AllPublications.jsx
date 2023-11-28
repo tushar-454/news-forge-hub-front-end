@@ -49,7 +49,7 @@ const AllPublications = () => {
   return (
     <div>
       <PageTitle>All Publications</PageTitle>
-      {/* all article tables  */}
+      {/* all publication tables  */}
       <div className='overflow-auto'>
         <table border={'1'} className='w-full border'>
           <thead>

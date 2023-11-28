@@ -8,6 +8,7 @@ import AllPaymentHistory from '../Pages/AllPaymentHistory';
 import AllPublications from '../Pages/AllPublications';
 import AllStatistics from '../Pages/AllStatistics';
 import AllUser from '../Pages/AllUser';
+import Articles from '../Pages/Articles';
 import Error from '../Pages/Error';
 import Home from '../Pages/Home';
 import Login from '../Pages/Login';
@@ -51,7 +52,7 @@ const routes = createBrowserRouter([
         path: 'all-articles',
         element: (
           <PrivateRoutes>
-            <AllArticles />
+            <Articles />
           </PrivateRoutes>
         ),
       },
