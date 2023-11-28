@@ -1,7 +1,7 @@
 const MyArticles = () => {
   return (
     <div>
-      <h1>This is a my all aricles page</h1>
+      <h1>This is a my all aricles page user</h1>
     </div>
   );
 };

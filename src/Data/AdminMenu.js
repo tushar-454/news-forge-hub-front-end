@@ -1,18 +1,26 @@
 const adminMenu = [
   {
-    path: 'add-publications',
-    menuName: 'Statistics',
-  },
-  {
-    path: 'add-publications',
-    menuName: 'All Users',
-  },
-  {
-    path: '/',
+    path: 'articles',
     menuName: 'All Articles',
   },
   {
-    path: '/',
+    path: 'users',
+    menuName: 'All Users',
+  },
+  {
+    path: 'publishers',
+    menuName: 'All Publications',
+  },
+  {
+    path: 'add-publications',
+    menuName: 'Add Publications',
+  },
+  {
+    path: 'statistics',
+    menuName: 'Statistics',
+  },
+  {
+    path: 'payment-history',
     menuName: 'Payment History',
   },
 ];

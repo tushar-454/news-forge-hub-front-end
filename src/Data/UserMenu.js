@@ -1,14 +1,14 @@
 const userMenus = [
   {
-    path: 'add-publications',
+    path: 'my-articles',
     menuName: 'My Articles',
   },
   {
-    path: '/',
+    path: 'my-premium-articles',
     menuName: 'My Premium Articles',
   },
   {
-    path: '/',
+    path: 'my-paymetn-history',
     menuName: 'Payment History',
   },
 ];

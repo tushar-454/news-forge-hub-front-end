@@ -46,12 +46,16 @@ const Dashboard = () => {
             className='w-20 h-20 object-cover rounded-full'
           />
           <h1 className='text-2xl font-medium my-3'>{user?.displayName}</h1>
+          <button className='font-semibold text-md p-3 px-5 bg-[#5662BC] text-white rounded-full'>
+            {!isLoading && userInfo.role}
+          </button>
         </div>
+        <hr />
         {/* show all action routes here */}
-        {isLoading || (
-          <>
-            {userInfo.role === 'ADMIN' ? <AdminMenuList /> : <UserMenuList />}
-          </>
+        {!isLoading && userInfo.role === 'ADMIN' ? (
+          <AdminMenuList />
+        ) : (
+          <UserMenuList />
         )}
       </aside>
       <div className='w-full xl:w-4/5 bg-slate-100 pt-20'>
