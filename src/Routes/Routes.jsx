@@ -9,6 +9,7 @@ import AllPublications from '../Pages/AllPublications';
 import AllStatistics from '../Pages/AllStatistics';
 import AllUser from '../Pages/AllUser';
 import Articles from '../Pages/Articles';
+import ArticlesDetails from '../Pages/ArticlesDetails';
 import Error from '../Pages/Error';
 import Home from '../Pages/Home';
 import Login from '../Pages/Login';
@@ -53,6 +54,14 @@ const routes = createBrowserRouter([
         element: (
           <PrivateRoutes>
             <Articles />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: '/all-articles/articles/:id',
+        element: (
+          <PrivateRoutes>
+            <ArticlesDetails />
           </PrivateRoutes>
         ),
       },
