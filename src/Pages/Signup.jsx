@@ -142,7 +142,7 @@ const Signup = () => {
 
       const res = await signupWithEmailPassword(email, password);
       if (res.user) {
-        await updateUserProfile(name, imageData?.data?.display_url);
+        await updateUserProfile(name, imageData);
         const tokenPayload = {
           email: res.user?.email,
           role: 'USER',
@@ -153,6 +153,7 @@ const Signup = () => {
         axios.post('/users', {
           name: res.user?.displayName,
           email: res.user?.email,
+          photo: res?.user?.photoURL,
         });
         toast.success('Account create successfully.');
         navigate(state || '/');

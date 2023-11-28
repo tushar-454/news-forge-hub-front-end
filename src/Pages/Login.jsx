@@ -104,7 +104,11 @@ const Login = () => {
           premiumTill: null,
         };
         axios.post('/jwt/token', tokenPayload);
-        axios.post('/users', { name: res.user.displayName, email: email });
+        axios.post('/users', {
+          name: res.user.displayName,
+          email: email,
+          photo: res?.user?.photoURL,
+        });
         navigate(state || '/');
       }
     } catch (error) {

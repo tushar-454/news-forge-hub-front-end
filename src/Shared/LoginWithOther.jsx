@@ -26,6 +26,7 @@ const LoginWithOther = () => {
         axios.post('/users', {
           name: res?.user?.displayName,
           email: res?.user?.email,
+          photo: res?.user?.photoURL,
         });
         toast.success('Login successfully');
         navigate(state || '/');
