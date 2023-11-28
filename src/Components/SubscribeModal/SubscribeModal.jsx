@@ -18,7 +18,7 @@ const SubscribeModal = ({ closeFunc }) => {
       <div>
         <Input placeholder={'enter your email'} id={'eamil'} />
         <Link
-          to={'/subscription'}
+          to={'/subscriptions'}
           className='bg-blue-500 text-white text-lg px-3 py-2 block mt-5 text-center rounded-lg hover:bg-blue-600 active:bg-blue-700 transition'
         >
           Go to

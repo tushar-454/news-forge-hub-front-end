@@ -10,6 +10,7 @@ import AllStatistics from '../Pages/AllStatistics';
 import AllUser from '../Pages/AllUser';
 import Articles from '../Pages/Articles';
 import ArticlesDetails from '../Pages/ArticlesDetails';
+import Checkout from '../Pages/Checkout';
 import Error from '../Pages/Error';
 import Home from '../Pages/Home';
 import Login from '../Pages/Login';
@@ -70,6 +71,14 @@ const routes = createBrowserRouter([
         element: (
           <PrivateRoutes>
             <Subscriptions />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: 'payment',
+        element: (
+          <PrivateRoutes>
+            <Checkout />
           </PrivateRoutes>
         ),
       },
