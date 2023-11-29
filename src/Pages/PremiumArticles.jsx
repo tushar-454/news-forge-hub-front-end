@@ -3,12 +3,15 @@ import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import color from '../Data/Colors';
 import useArticles from '../Hook/useArticles';
+import useUserInfo from '../Hook/useUserInfo';
 import Container from '../Shared/Container';
 import SectionTitle from '../Shared/SectionTitle';
 import premium from '../assets/icon/premium.png';
 
 const PremiumArticles = () => {
   const { allArticles, isLoading, isError } = useArticles();
+  const { userInfo, isLoading: userLoad } = useUserInfo();
+
   return (
     <section>
       <Helmet>
@@ -43,7 +46,7 @@ const PremiumArticles = () => {
                 <div>
                   <img
                     src={article.image}
-                    className='w-full h-40 object-cover rounded-lg'
+                    className='w-full h-48 object-cover rounded-lg'
                   />
                 </div>
                 <div className='my-3 flex flex-wrap gap-2'>
@@ -61,14 +64,24 @@ const PremiumArticles = () => {
                   Publication: {article.publication}
                 </h2>
                 <p>{article.description.slice(0, 111)}</p>
-                <Link to={`/all-articles/articles/${article._id}`}>
+                <Link
+                  to={
+                    article.isPremium === 'Approved' &&
+                    !userLoad &&
+                    !userInfo.isPremium
+                      ? ''
+                      : `/all-articles/articles/${article._id}`
+                  }
+                >
                   <button
                     disabled={article.isPremium === 'Approved' ? false : true}
                     className={`inline-block mt-6 bg-pink-400 text-white
                     font-medium p-3 rounded-lg ${
-                      article.isPremium === 'Approved'
-                        ? 'cursor-pointer'
-                        : 'cursor-not-allowed bg-pink-200'
+                      article.isPremium === 'Approved' &&
+                      !userLoad &&
+                      !userInfo.isPremium
+                        ? 'cursor-not-allowed bg-pink-200'
+                        : 'cursor-pointer'
                     }`}
                   >
                     View Details

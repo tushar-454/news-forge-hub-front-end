@@ -18,12 +18,19 @@ const Dashboard = () => {
         setIsCollapse(false);
       }
     });
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 70) {
+        document.querySelector('.sidebar').style.top = '0';
+      } else {
+        document.querySelector('.sidebar').style.top = '80px';
+      }
+    });
   }, []);
 
   return (
     <div className='flex relative'>
       <aside
-        className={`z-50 w-[374px] absolute xl:static border-r xl:border-none min-h-screen bg-white transition-all ${
+        className={`sidebar z-50 w-[374px] fixed xl:static border-r xl:border-none min-h-screen bg-white transition-all ${
           isCollapse ? 'translate-x-[-23.5rem]' : 'translate-x-0'
         }`}
       >

@@ -1,11 +1,14 @@
 import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
+import { FaRegClock } from 'react-icons/fa6';
+import { IoEyeOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import Button from '../Components/UI/Button';
 import Input from '../Components/UI/Input';
 import color from '../Data/Colors';
 import useArticles from '../Hook/useArticles';
 import usePublications from '../Hook/usePublications';
+import useUserInfo from '../Hook/useUserInfo';
 import Container from '../Shared/Container';
 import SectionTitle from '../Shared/SectionTitle';
 import premium from '../assets/icon/premium.png';
@@ -13,7 +16,7 @@ import premium from '../assets/icon/premium.png';
 const Articles = () => {
   const { allArticles, isLoading, isError } = useArticles();
   const { publications, isLoading: publicationLoad } = usePublications();
-
+  const { userInfo, isLoading: userLoad } = useUserInfo();
   return (
     <section>
       <Helmet>
@@ -93,7 +96,7 @@ const Articles = () => {
                 <div>
                   <img
                     src={article.image}
-                    className='w-full h-40 object-cover rounded-lg'
+                    className='w-full h-48 object-cover rounded-lg'
                   />
                 </div>
                 <div className='my-3 flex flex-wrap gap-2'>
@@ -107,15 +110,35 @@ const Articles = () => {
                   ))}
                 </div>
                 <h1 className='text-xl'>{article.title}</h1>
+                <div className='flex justify-between items-center'>
+                  <h1 className='text-sm flex items-center gap-2 mt-4'>
+                    <FaRegClock />
+                    {new Date(article.date).toLocaleString()}
+                  </h1>
+                  <h1 className='text-sm flex items-center gap-2 mt-4'>
+                    <IoEyeOutline className='text-xl' />
+                    {article.viewCount}
+                  </h1>
+                </div>
                 <h2 className='my-4 font-bold'>
                   Publication: {article.publication}
                 </h2>
                 <p>{article.description.slice(0, 111)}</p>
-                <Link to={`articles/${article._id}`}>
+                <Link
+                  to={
+                    article.isPremium === 'Approved' &&
+                    !userLoad &&
+                    !userInfo.isPremium
+                      ? ''
+                      : `articles/${article._id}`
+                  }
+                >
                   <button
                     className={`inline-block mt-6 bg-pink-400 text-white
                     font-medium p-3 rounded-lg ${
-                      article.isPremium === 'Approved'
+                      article.isPremium === 'Approved' &&
+                      !userLoad &&
+                      !userInfo.isPremium
                         ? 'cursor-not-allowed bg-pink-200'
                         : 'cursor-pointer'
                     }`}
