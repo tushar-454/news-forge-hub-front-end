@@ -12,7 +12,7 @@ const usePublications = () => {
   } = useQuery({
     queryKey: ['publications'],
     queryFn: async () => {
-      const res = await axios.get(`/admin/getPublication`);
+      const res = await axios.get(`/publications`);
       return res.data;
     },
   });

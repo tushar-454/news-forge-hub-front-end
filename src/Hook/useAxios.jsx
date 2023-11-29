@@ -19,7 +19,7 @@ const useAxios = () => {
       (error) => {
         if (error.response.status === 401 || error.response.status === 403) {
           user?.logOutAccount().then(() => {
-            return <Navigate to={'/login'} />;
+            return <Navigate to={'/'} />;
           });
         }
         return Promise.reject(error);

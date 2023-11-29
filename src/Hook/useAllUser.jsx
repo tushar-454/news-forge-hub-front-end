@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import useAxios from './useAxios';
 
-const useAllUser = (page = 0) => {
+const useAllUser = () => {
   const axios = useAxios();
   const {
     data: allUsers,
@@ -16,26 +16,11 @@ const useAllUser = (page = 0) => {
     },
   });
 
-  const {
-    data: paginationUser,
-    isLoading: pagiUserLoad,
-    refetch: pagiUserRefetch,
-  } = useQuery({
-    queryKey: ['paniUsers'],
-    queryFn: async () => {
-      const res = await axios.get(`/admin/users?limit=${2}&page=${page}`);
-      return res.data;
-    },
-  });
-
   return {
     allUsers,
     isLoading,
     isError,
     refetch,
-    paginationUser,
-    pagiUserLoad,
-    pagiUserRefetch,
   };
 };
 

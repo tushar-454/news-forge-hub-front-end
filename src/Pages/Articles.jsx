@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
@@ -12,14 +11,9 @@ import SectionTitle from '../Shared/SectionTitle';
 import premium from '../assets/icon/premium.png';
 
 const Articles = () => {
-  const [title, setTitle] = useState('');
-  const { allArticles, isLoading, isError, refetch } = useArticles(title);
+  const { allArticles, isLoading, isError } = useArticles();
   const { publications, isLoading: publicationLoad } = usePublications();
-  const handleTitleSearch = (e) => {
-    e.preventDefault();
-    setTitle(e.target.title.value);
-    refetch();
-  };
+
   return (
     <section>
       <Helmet>
@@ -30,7 +24,7 @@ const Articles = () => {
         {/* search divition  */}
         <div className='my-10 flex gap-5'>
           <div className='flex flex-col items-center'>
-            <form onSubmit={handleTitleSearch}>
+            <form>
               <Input
                 displayName={'Search By Title'}
                 placeholder='enter search title'
@@ -86,7 +80,7 @@ const Articles = () => {
               <div
                 key={index}
                 className={`${
-                  article.isApprove === 'Pending' ? 'hidden' : 'block'
+                  article.isApprove !== 'Approved' ? 'hidden' : 'block'
                 } p-5 border rounded-lg bg-[${
                   color[Math.floor(Math.random() * color.length)]
                 }] relative`}
