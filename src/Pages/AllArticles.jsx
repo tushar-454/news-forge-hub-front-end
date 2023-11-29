@@ -1,19 +1,41 @@
+import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
+import { IoCloseOutline } from 'react-icons/io5';
 import swal from 'sweetalert';
+import Button from '../Components/UI/Button';
 import useArticles from '../Hook/useArticles';
 import useAxios from '../Hook/useAxios';
 import PageTitle from '../Shared/PageTitle';
 
 const AllArticles = () => {
+  const [modal, setModal] = useState(false);
+  const [aricleId, setArticleId] = useState('');
   const { allArticles, isLoading, isError, refetch } = useArticles();
   const axios = useAxios();
 
+  // handle decline submit
+  const handleDeclineSubmit = async (e) => {
+    e.preventDefault();
+    const declineMsg = e.target.decline.value;
+    const res = await axios.patch(`/admin/articles/${aricleId}`, {
+      isApprove: 'Decline',
+      declinemsg: declineMsg,
+    });
+    if (res.data.error) {
+      return toast.error(res.data.error);
+    }
+    toast.success(res.data.message);
+    setModal(false);
+    e.target.reset();
+    refetch();
+  };
   //handle article approved
   const handleArticleApproved = async (e, id) => {
     try {
       if (e.target.value === 'Decline') {
-        console.log('if called');
+        setModal(true);
+        setArticleId(id);
         return;
       }
       const res = await axios.patch(`/admin/articles/${id}`, {
@@ -24,7 +46,6 @@ const AllArticles = () => {
       }
       toast.success(res.data.message);
       refetch();
-      return;
     } catch (error) {
       console.log(error);
     }
@@ -114,15 +135,23 @@ const AllArticles = () => {
               allArticles?.map((article, index) => (
                 <tr key={index} className='bg-[#ecf4ff]'>
                   <td className='tableTd'>{++index}</td>
-                  <td className='tableTd'>
-                    <img
-                      src={article.image}
-                      className='w-12 h-12 rounded-full object-cover'
-                    />
+                  <td className='tableTd flex gap-3 items-center'>
+                    <p className='w-12'>
+                      <img
+                        src={article.photo}
+                        className='w-12 h-12 rounded-full object-cover'
+                      />
+                    </p>
+                    <p>
+                      <span className='block'>{article.name}</span>
+                      <span>{article.email}</span>
+                    </p>
                   </td>
-                  <td className='tableTd'>{article.title}</td>
+                  <td className='tableTd whitespace-nowrap'>{article.title}</td>
                   <td className='tableTd'>{article.email}</td>
-                  <td className='tableTd'>{article.publication}</td>
+                  <td className='tableTd whitespace-nowrap'>
+                    {article.publication}
+                  </td>
                   <td className='tableTd'>{article.isApprove}</td>
                   <td className='tableTd'>
                     <select
@@ -158,6 +187,36 @@ const AllArticles = () => {
           </tbody>
         </table>
       </div>
+      {/* mesage modal  */}
+      {modal && (
+        <div
+          className={`fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-white w-[420px] bg-slate-200 p-10 rounded-lg popup`}
+        >
+          <IoCloseOutline
+            onClick={() => setModal(false)}
+            className='absolute top-2 right-2 cursor-pointer text-3xl text-black hover:scale-125 active:scale-100 transition'
+          />
+          <h1 className='text-black font-semibold text-3xl my-3 text-center'>
+            Write decline message
+          </h1>
+          <div>
+            <form onSubmit={(e) => handleDeclineSubmit(e)}>
+              <textarea
+                name='decline'
+                id='decline'
+                className={`w-full outline-none border border-transparent bg-[#f9f9f9] text-[#747474] text-lg p-4 rounded-lg focus:border-[#c1c1c1] transition`}
+                cols='10'
+                rows='5'
+                placeholder='what happen'
+              ></textarea>
+              <Button
+                type={'submit'}
+                displayName={'Decline and send message'}
+              />
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

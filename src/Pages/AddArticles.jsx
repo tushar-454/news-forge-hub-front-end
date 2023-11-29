@@ -72,6 +72,8 @@ const AddArticles = () => {
         tags,
         description,
         email: user?.email,
+        name: user?.displayName,
+        photo: user?.photoURL,
       };
       const res = await axios.post('/articles/add-article', articleData);
       if (res.data.message) {
