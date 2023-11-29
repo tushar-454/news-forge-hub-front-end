@@ -1,10 +1,77 @@
 import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
+import swal from 'sweetalert';
 import useArticles from '../Hook/useArticles';
+import useAxios from '../Hook/useAxios';
 import PageTitle from '../Shared/PageTitle';
 
 const AllArticles = () => {
-  const { allArticles, isLoading, isError } = useArticles();
+  const { allArticles, isLoading, isError, refetch } = useArticles();
+  const axios = useAxios();
+
+  // handle article approved,pending,decline
+  const handleArticleApproved = async (where, e, id) => {
+    try {
+      if (where === 'approved') {
+        const res = await axios.patch(`/admin/articles/${id}`, {
+          isApprove: e.target.value,
+        });
+        if (res.data.error) {
+          return toast.error(res.data.error);
+        }
+        toast.success(res.data.message);
+        refetch();
+        return;
+      }
+      // premium aricle approve code
+      if (where === 'premium') {
+        const res = await axios.patch(`/admin/articles/${id}`, {
+          isPremium: e.target.value,
+        });
+        if (res.data.error) {
+          return toast.error(res.data.error);
+        }
+        toast.success(res.data.message);
+        refetch();
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //handle article delete function
+  const handleArticleDelete = async (id) => {
+    swal({
+      title: 'Are you sure to delete?',
+      text: 'Thing again one time.',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+    }).then(async (willDelete) => {
+      if (willDelete) {
+        try {
+          const res = await axios.delete(`/admin/deleteArticle/${id}`);
+          if (res.data.error) {
+            return swal(res.data.error, {
+              icon: 'error',
+            });
+          }
+          if (res.data.message) {
+            refetch();
+            return swal(res.data.message, {
+              icon: 'success',
+            });
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        swal('You changed your mind.');
+      }
+    });
+  };
+
   return (
     <div>
       <Helmet>
@@ -22,7 +89,9 @@ const AllArticles = () => {
               <th className='tableTh'>Posted Date</th>
               <th className='tableTh'>Publisher</th>
               <th className='tableTh'>Status</th>
-              <th className='tableTh'>Action</th>
+              <th className='tableTh'>Approved Status</th>
+              <th className='tableTh'>Premium Status</th>
+              <th className='tableTh'>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -48,30 +117,37 @@ const AllArticles = () => {
                   <td className='tableTd'>{article.email}</td>
                   <td className='tableTd'>{article.publication}</td>
                   <td className='tableTd'>{article.isApprove}</td>
-                  <td className='tableTd flex gap-1'>
-                    <span
-                      // onClick={() => handleDeletePublication(publication._id)}
-                      className='bg-green-400 text-white px-4 py-2 rounded-full transition hover:bg-green-500 active:bg-green-600 cursor-pointer'
+                  <td className='tableTd'>
+                    <select
+                      defaultValue={article.isApprove}
+                      className='outline-none bg-none bg-transparent border-none w-[130px] cursor-pointer '
+                      onChange={(e) =>
+                        handleArticleApproved('approved', e, article._id)
+                      }
                     >
-                      Approved
-                    </span>
-                    <span
-                      // onClick={() => handleDeletePublication(publication._id)}
-                      className='bg-orange-400 text-white px-4 py-2 rounded-full transition hover:bg-orange-500 active:bg-orange-600 cursor-pointer'
+                      <option value='Decline'>Decline</option>
+                      <option value='Pending'>Pending</option>
+                      <option value='Approved'>Approved</option>
+                    </select>
+                  </td>
+                  <td className='tableTd'>
+                    <select
+                      defaultValue={article.isPremium}
+                      className='outline-none bg-none bg-transparent border-none w-[130px] cursor-pointer '
+                      onChange={(e) =>
+                        handleArticleApproved('premium', e, article._id)
+                      }
                     >
-                      Decline
-                    </span>
+                      <option value='NONE'>None</option>
+                      <option value='Approved'>Approved</option>
+                    </select>
+                  </td>
+                  <td className='tableTd'>
                     <span
-                      // onClick={() => handleDeletePublication(publication._id)}
-                      className='bg-red-400 text-white px-4 py-2 rounded-full transition hover:bg-red-500 active:bg-red-600 cursor-pointer'
+                      onClick={() => handleArticleDelete(article._id)}
+                      className='bg-red-400 text-sm text-white px-4 py-2 rounded-full transition hover:bg-red-500 active:bg-red-600 cursor-pointer'
                     >
                       Delete
-                    </span>
-                    <span
-                      // onClick={() => handleDeletePublication(publication._id)}
-                      className='bg-blue-400 text-white px-4 py-2 rounded-full transition hover:bg-blue-500 active:bg-blue-600 cursor-pointer'
-                    >
-                      Premium
                     </span>
                   </td>
                 </tr>

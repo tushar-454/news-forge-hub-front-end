@@ -25,7 +25,10 @@ const ArticlesDetails = () => {
   return (
     <section>
       <Helmet>
-        <title>{articlesDetails.title} | NewsForge Hub</title>
+        <title>
+          {!isLoading ? articlesDetails.title : 'Articles Details'} | NewsForge
+          Hub
+        </title>
       </Helmet>
       <Container>
         <div className='w-full lg:w-2/3 mx-auto my-10'>
