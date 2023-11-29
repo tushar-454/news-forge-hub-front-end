@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
 import useAllUser from '../Hook/useAllUser';
@@ -6,13 +5,11 @@ import useAxios from '../Hook/useAxios';
 import PageTitle from '../Shared/PageTitle';
 
 const AllUser = () => {
-  const [clickPage, setClickPage] = useState(0);
+  // const [clickPage, setClickPage] = useState(0);
   const { allUsers, isLoading, isError, refetch } = useAllUser();
-  const { paginationUser, pagiUserLoad, pagiUserRefetch } =
-    useAllUser(clickPage);
   const axios = useAxios();
-  const page = Math.ceil(!isLoading && allUsers.length / 2);
-  const btnArr = [...new Array(page).keys()];
+  // const page = Math.ceil(!isLoading && allUsers.length / 2);
+  // const btnArr = [...new Array(page).keys()];
 
   // handle role update
   const handleRoleUpdate = async (e, email) => {
@@ -23,24 +20,6 @@ const AllUser = () => {
       refetch();
     } else {
       toast.error('There was an error');
-    }
-  };
-
-  const handlePagination = (page) => {
-    setClickPage(parseInt(page));
-    pagiUserRefetch();
-  };
-
-  const handlePrev = () => {
-    if (clickPage > 0) {
-      setClickPage(clickPage - 1);
-      pagiUserRefetch();
-    }
-  };
-  const handleNext = () => {
-    if (clickPage < page - 1) {
-      setClickPage(clickPage + 1);
-      pagiUserRefetch();
     }
   };
 
@@ -73,8 +52,8 @@ const AllUser = () => {
                 </td>
               </tr>
             )}
-            {!pagiUserLoad &&
-              paginationUser?.map((user, index) => (
+            {!isLoading &&
+              allUsers?.map((user, index) => (
                 <tr key={index} className='bg-[#ecf4ff]'>
                   <td className='tableTd'>{++index}</td>
                   <td className='tableTd'>
@@ -107,7 +86,7 @@ const AllUser = () => {
         </table>
       </div>
       {/* pagination  */}
-      <div className='flex justify-center items-center gap-4 my-5'>
+      {/* <div className='flex justify-center items-center gap-4 my-5'>
         <span
           onClick={handlePrev}
           className='w-12 px-10 py-3 rounded flex justify-center bg-white font-bold text-lg cursor-pointer'
@@ -129,7 +108,7 @@ const AllUser = () => {
         >
           Next
         </span>
-      </div>
+      </div> */}
     </section>
   );
 };
