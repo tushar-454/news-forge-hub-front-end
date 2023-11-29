@@ -114,11 +114,12 @@ const AllArticles = () => {
               <th className='tableTh'>No</th>
               <th className='tableTh'>Author Info</th>
               <th className='tableTh'>Title</th>
-              <th className='tableTh'>Posted Date</th>
+              <th className='tableTh'>Email</th>
+              <th className='tableTh whitespace-nowrap'>Posted Date</th>
               <th className='tableTh'>Publisher</th>
               <th className='tableTh'>Status</th>
-              <th className='tableTh'>Approved Status</th>
-              <th className='tableTh'>Premium Status</th>
+              <th className='tableTh whitespace-nowrap'>Approved Status</th>
+              <th className='tableTh whitespace-nowrap'>Premium Status</th>
               <th className='tableTh'>Delete</th>
             </tr>
           </thead>
@@ -149,6 +150,9 @@ const AllArticles = () => {
                   </td>
                   <td className='tableTd whitespace-nowrap'>{article.title}</td>
                   <td className='tableTd'>{article.email}</td>
+                  <td className='tableTd'>
+                    {new Date(article.date).toLocaleDateString()}
+                  </td>
                   <td className='tableTd whitespace-nowrap'>
                     {article.publication}
                   </td>
@@ -156,7 +160,7 @@ const AllArticles = () => {
                   <td className='tableTd'>
                     <select
                       defaultValue={article.isApprove}
-                      className='outline-none bg-none bg-transparent border-none w-[130px] cursor-pointer '
+                      className='outline-none bg-none bg-transparent border-none w-full cursor-pointer '
                       onChange={(e) => handleArticleApproved(e, article._id)}
                     >
                       <option value='Decline'>Decline</option>
@@ -167,7 +171,7 @@ const AllArticles = () => {
                   <td className='tableTd'>
                     <select
                       defaultValue={article.isPremium}
-                      className='outline-none bg-none bg-transparent border-none w-[130px] cursor-pointer '
+                      className='outline-none bg-none bg-transparent border-none w-full cursor-pointer '
                       onChange={(e) => handleArticlePremium(e, article._id)}
                     >
                       <option value='NONE'>None</option>
