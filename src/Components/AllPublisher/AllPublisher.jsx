@@ -11,7 +11,7 @@ const AllPublisher = () => {
         {/* publisher wrapper  */}
         <div className='grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mb-10'>
           {!isLoading &&
-            publications.map((publication, index) => (
+            publications?.map((publication, index) => (
               <div key={index} className='relative bg-[#C5FBE1] p-5 rounded-lg'>
                 <img
                   src={publication.publicationLogo}

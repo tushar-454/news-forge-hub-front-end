@@ -8,7 +8,7 @@ const TopArticalSlider = () => {
   return (
     <Carousel autoPlay={true} emulateTouch={true} showThumbs={false}>
       {!topArticlesLoad &&
-        topArticles.map((article, index) => (
+        topArticles?.map((article, index) => (
           <div key={index} className='relative'>
             <img src={article.image} className='object-cover' />
             <div className='absolute bottom-0 bg-[#00000080] text-white w-full py-2 px-2 md:py-10 md:px-2 hover:backdrop-blur-md transition'>

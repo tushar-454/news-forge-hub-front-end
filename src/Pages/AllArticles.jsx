@@ -9,32 +9,39 @@ const AllArticles = () => {
   const { allArticles, isLoading, isError, refetch } = useArticles();
   const axios = useAxios();
 
-  // handle article approved,pending,decline
-  const handleArticleApproved = async (where, e, id) => {
+  //handle article approved
+  const handleArticleApproved = async (e, id) => {
     try {
-      if (where === 'approved') {
-        const res = await axios.patch(`/admin/articles/${id}`, {
-          isApprove: e.target.value,
-        });
-        if (res.data.error) {
-          return toast.error(res.data.error);
-        }
-        toast.success(res.data.message);
-        refetch();
+      if (e.target.value === 'Decline') {
+        console.log('if called');
         return;
       }
+      const res = await axios.patch(`/admin/articles/${id}`, {
+        isApprove: e.target.value,
+      });
+      if (res.data.error) {
+        return toast.error(res.data.error);
+      }
+      toast.success(res.data.message);
+      refetch();
+      return;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // handle article approved,pending,decline
+  const handleArticlePremium = async (e, id) => {
+    try {
       // premium aricle approve code
-      if (where === 'premium') {
-        const res = await axios.patch(`/admin/articles/${id}`, {
-          isPremium: e.target.value,
-        });
-        if (res.data.error) {
-          return toast.error(res.data.error);
-        }
-        toast.success(res.data.message);
-        refetch();
-        return;
+      const res = await axios.patch(`/admin/articles/${id}`, {
+        isPremium: e.target.value,
+      });
+      if (res.data.error) {
+        return toast.error(res.data.error);
       }
+      toast.success(res.data.message);
+      refetch();
     } catch (error) {
       console.log(error);
     }
@@ -121,9 +128,7 @@ const AllArticles = () => {
                     <select
                       defaultValue={article.isApprove}
                       className='outline-none bg-none bg-transparent border-none w-[130px] cursor-pointer '
-                      onChange={(e) =>
-                        handleArticleApproved('approved', e, article._id)
-                      }
+                      onChange={(e) => handleArticleApproved(e, article._id)}
                     >
                       <option value='Decline'>Decline</option>
                       <option value='Pending'>Pending</option>
@@ -134,9 +139,7 @@ const AllArticles = () => {
                     <select
                       defaultValue={article.isPremium}
                       className='outline-none bg-none bg-transparent border-none w-[130px] cursor-pointer '
-                      onChange={(e) =>
-                        handleArticleApproved('premium', e, article._id)
-                      }
+                      onChange={(e) => handleArticlePremium(e, article._id)}
                     >
                       <option value='NONE'>None</option>
                       <option value='Approved'>Approved</option>

@@ -16,23 +16,23 @@ const Statistics = () => {
         <div className=' flex justify-center'>
           <div className='w-full lg:w-[50rem] grid gap-28 justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-4 mb-32'>
             <RadialChart
-              count={!userStatisticsLoad && userStatistics.totalUser}
+              count={!userStatisticsLoad ? userStatistics?.totalUser : 0}
               circleValue={450 - 450}
               category={'All user'}
             />
             {!userStatisticsLoad &&
-              userStatistics.usersStatistics.map((item, index) => (
+              userStatistics?.usersStatistics?.map((item, index) => (
                 <RadialChart
                   key={index}
                   count={item.count}
                   circleValue={
-                    450 - 450 * (item.count / userStatistics.totalUser)
+                    450 - 450 * (item.count / userStatistics?.totalUser)
                   }
                   category={item.isPremium ? 'Premium users' : 'Normal user'}
                 />
               ))}
             <RadialChart
-              count={!isLoading && allArticles.length}
+              count={!isLoading ? allArticles?.length : 0}
               circleValue={450 - 450}
               category={'All Articles'}
             />

@@ -8,16 +8,14 @@ const PublicRoutes = ({ children }) => {
   const { user, loading: isLoading } = useAuth();
   if (isLoading) {
     return (
-      <p>
-        <UseAnimations
-          animation={loading}
-          wrapperStyle={{
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-          }}
-        />
-      </p>
+      <UseAnimations
+        animation={loading}
+        wrapperStyle={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      />
     );
   }
   if (user) {

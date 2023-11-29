@@ -52,11 +52,8 @@ const Dashboard = () => {
         </div>
         <hr />
         {/* show all action routes here */}
-        {!isLoading && userInfo.role === 'ADMIN' ? (
-          <AdminMenuList />
-        ) : (
-          <UserMenuList />
-        )}
+        {!isLoading && userInfo.role === 'ADMIN' && <AdminMenuList />}
+        {!isLoading && userInfo.role === 'USER' && <UserMenuList />}
       </aside>
       <div className='w-full min-h-screen xl:h-auto xl:w-4/5 flex-grow bg-slate-100'>
         <Outlet />
