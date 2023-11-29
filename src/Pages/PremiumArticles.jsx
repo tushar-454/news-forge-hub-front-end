@@ -2,14 +2,14 @@ import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import color from '../Data/Colors';
-import useArticles from '../Hook/useArticles';
+import usePremiumArticles from '../Hook/usePremiumArticles';
 import useUserInfo from '../Hook/useUserInfo';
 import Container from '../Shared/Container';
 import SectionTitle from '../Shared/SectionTitle';
 import premium from '../assets/icon/premium.png';
 
 const PremiumArticles = () => {
-  const { allArticles, isLoading, isError } = useArticles();
+  const { premiumArticles, isLoading } = usePremiumArticles();
   const { userInfo, isLoading: userLoad } = useUserInfo();
 
   return (
@@ -21,20 +21,14 @@ const PremiumArticles = () => {
       <Container>
         {/* all premum article div grid  */}
         <div className='grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mb-10'>
-          {isError && toast.error('There was an error')}
           {!isLoading &&
-            allArticles.length === 0 &&
-            toast.error('No articles found')}
+            premiumArticles.length === 0 &&
+            toast.error('No premium articles found')}
           {!isLoading &&
-            allArticles?.map((article, index) => (
+            premiumArticles?.map((article, index) => (
               <div
                 key={index}
-                className={`${
-                  article.isApprove === 'Approved' &&
-                  article.isPremium === 'Approved'
-                    ? 'block'
-                    : 'hidden'
-                } p-5 border rounded-lg bg-[${
+                className={`p-5 border rounded-lg bg-[${
                   color[Math.floor(Math.random() * color.length)]
                 }] relative`}
               >

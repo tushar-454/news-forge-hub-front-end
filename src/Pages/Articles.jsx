@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Button from '../Components/UI/Button';
 import Input from '../Components/UI/Input';
 import color from '../Data/Colors';
-import useArticles from '../Hook/useArticles';
+import useApprovedArticles from '../Hook/useApprovedArticles';
 import usePublications from '../Hook/usePublications';
 import useUserInfo from '../Hook/useUserInfo';
 import Container from '../Shared/Container';
@@ -14,7 +14,7 @@ import SectionTitle from '../Shared/SectionTitle';
 import premium from '../assets/icon/premium.png';
 
 const Articles = () => {
-  const { allArticles, isLoading, isError } = useArticles();
+  const { approvedArticles, isLoading, isError } = useApprovedArticles();
   const { publications, isLoading: publicationLoad } = usePublications();
   const { userInfo, isLoading: userLoad } = useUserInfo();
   return (
@@ -76,10 +76,10 @@ const Articles = () => {
         <div className='grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mb-10'>
           {isError && toast.error('There was an error')}
           {!isLoading &&
-            allArticles.length === 0 &&
+            approvedArticles.length === 0 &&
             toast.error('No articles found')}
           {!isLoading &&
-            allArticles?.map((article, index) => (
+            approvedArticles?.map((article, index) => (
               <div
                 key={index}
                 className={`${

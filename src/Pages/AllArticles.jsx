@@ -40,6 +40,7 @@ const AllArticles = () => {
       }
       const res = await axios.patch(`/admin/articles/${id}`, {
         isApprove: e.target.value,
+        declinemsg: '',
       });
       if (res.data.error) {
         return toast.error(res.data.error);
