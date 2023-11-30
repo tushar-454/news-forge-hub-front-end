@@ -21,6 +21,7 @@ import PremiumArticles from '../Pages/PremiumArticles';
 import Signup from '../Pages/Signup';
 import Subscriptions from '../Pages/Subscriptions';
 import UserProfile from '../Pages/UserProfile';
+import AdminRoutes from './AdminRoutes';
 import PrivateRoutes from './PrivateRoutes';
 import PublicRoutes from './PublicRoutes';
 
@@ -110,7 +111,9 @@ const routes = createBrowserRouter([
             path: 'articles',
             element: (
               <PrivateRoutes>
-                <AllArticles />
+                <AdminRoutes>
+                  <AllArticles />
+                </AdminRoutes>
               </PrivateRoutes>
             ),
           },
@@ -118,7 +121,9 @@ const routes = createBrowserRouter([
             path: 'users',
             element: (
               <PrivateRoutes>
-                <AllUser />
+                <AdminRoutes>
+                  <AllUser />
+                </AdminRoutes>
               </PrivateRoutes>
             ),
           },
@@ -126,7 +131,9 @@ const routes = createBrowserRouter([
             path: 'add-publications',
             element: (
               <PrivateRoutes>
-                <AddPublications />
+                <AdminRoutes>
+                  <AddPublications />
+                </AdminRoutes>
               </PrivateRoutes>
             ),
           },
@@ -134,7 +141,9 @@ const routes = createBrowserRouter([
             path: 'publishers',
             element: (
               <PrivateRoutes>
-                <AllPublications />
+                <AdminRoutes>
+                  <AllPublications />
+                </AdminRoutes>
               </PrivateRoutes>
             ),
           },
@@ -142,7 +151,9 @@ const routes = createBrowserRouter([
             path: 'statistics',
             element: (
               <PrivateRoutes>
-                <AllStatistics />
+                <AdminRoutes>
+                  <AllStatistics />
+                </AdminRoutes>
               </PrivateRoutes>
             ),
           },
@@ -150,7 +161,9 @@ const routes = createBrowserRouter([
             path: 'payment-history',
             element: (
               <PrivateRoutes>
-                <AllPaymentHistory />
+                <AdminRoutes>
+                  <AllPaymentHistory />
+                </AdminRoutes>
               </PrivateRoutes>
             ),
           },
