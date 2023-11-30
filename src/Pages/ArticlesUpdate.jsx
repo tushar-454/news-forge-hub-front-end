@@ -71,7 +71,7 @@ const ArticlesUpdate = ({
 
       const articleData = {
         title,
-        image,
+        image: image ? image : !updArtLoad && updArticle.image,
         publication,
         tags,
         description,

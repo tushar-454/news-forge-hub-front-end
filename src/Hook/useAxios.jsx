@@ -4,7 +4,7 @@ import { Navigate } from 'react-router-dom';
 import useAuth from './useAuth';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:5000/api/v1',
+  baseURL: 'https://news-forge-hub.vercel.app/api/v1',
   withCredentials: true,
 });
 

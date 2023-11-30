@@ -25,6 +25,8 @@ const Articles = () => {
     tags,
     limit
   );
+  const { approvedArticles: allArticles, isLoading: allArticleLoad } =
+    useApprovedArticles();
   const { publications, isLoading: publicationLoad } = usePublications();
   const { userInfo, isLoading: userLoad } = useUserInfo();
   // handle title search
@@ -91,7 +93,7 @@ const Articles = () => {
         }, 0);
       }
       if (window.scrollY > 2600 && window.scrollY < 2630) {
-        setLimit(25);
+        setLimit(!allArticleLoad && allArticles.length);
         setTimeout(() => {
           refetch();
         }, 0);

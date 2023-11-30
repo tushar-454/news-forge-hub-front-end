@@ -147,7 +147,7 @@ const Signup = () => {
           email: res.user?.email,
           role: 'USER',
           isPremium: false,
-          premiumTill: null,
+          premiumTill: 0,
         };
         axios.post('/jwt/token', tokenPayload);
         axios.post('/users', {
