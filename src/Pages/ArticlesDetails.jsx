@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Helmet } from 'react-helmet';
+import { FaRegClock } from 'react-icons/fa6';
+import { IoEyeOutline } from 'react-icons/io5';
 import { useParams } from 'react-router-dom';
 import useAxios from '../Hook/useAxios';
 import Container from '../Shared/Container';
@@ -48,6 +50,16 @@ const ArticlesDetails = () => {
               <h1 className='text-4xl font-semibold my-5'>
                 {articlesDetails.title}
               </h1>
+              <p className='flex gap-5 justify-start items-center mb-5'>
+                <span className='flex items-center gap-1'>
+                  <FaRegClock />
+                  {new Date(articlesDetails.date).toLocaleString()}
+                </span>
+                <span className='flex items-center gap-1'>
+                  <IoEyeOutline className='text-xl' />
+                  {articlesDetails.viewCount}
+                </span>
+              </p>
               <h2 className='text-xl'>
                 Publisher: {articlesDetails.publication}
               </h2>
