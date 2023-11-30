@@ -70,7 +70,7 @@ const Subscriptions = () => {
               </select>
             </div>
           </div>
-          <h1 className='text-3xl font-bold my-4'>Total Due : ${money}</h1>
+          <h1 className='text-3xl font-bold my-4'>Total Amount : ${money}</h1>
           <Link to={'/payment'} state={money}>
             <Button displayName={'Checkout'} />
           </Link>

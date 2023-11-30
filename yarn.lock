@@ -1117,6 +1117,18 @@
   resolved "https://registry.yarnpkg.com/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.5.1.tgz#0e79117bacb5817ff9a88ab19cb59df839638d6d"
   integrity sha512-5I3Nz4Sb9TYOtkRwlH0ow+BhMH2vnh38tZ4J4mggE48M/YyJyp/0sPSxhw1UeS1+oBgQ8q7maFtSeKpeRJu41Q==
 
+"@stripe/react-stripe-js@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@stripe/react-stripe-js/-/react-stripe-js-2.4.0.tgz#b69d383a2b13e1104c5766695e7a865899cc84fb"
+  integrity sha512-1jVQEL3OuhuzNlf4OdfqovHt+MkWh8Uh8xpLxx/xUFUDdF+7/kDOrGKy+xJO3WLCfZUL7NAy+/ypwXbbYZi0tg==
+  dependencies:
+    prop-types "^15.7.2"
+
+"@stripe/stripe-js@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-2.2.0.tgz#d5eeeae2efa5a9167fd74a047eceef8be3281b55"
+  integrity sha512-YyXQbsXvnNRJ6MofFhCLIQ4W7UpfkfSOQhjIaHEiCMBv3IBxhzugXiYNNzceGTK/7DL31v7HtTnkJ+FI+6AIow==
+
 "@szhsin/react-accordion@^1.2.3":
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/@szhsin/react-accordion/-/react-accordion-1.2.3.tgz#ee4d83c66a89748bfe2a2b23dd14bbb3d4f63fbf"

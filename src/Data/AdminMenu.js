@@ -19,10 +19,6 @@ const adminMenu = [
     path: 'statistics',
     menuName: 'Statistics',
   },
-  {
-    path: 'payment-history',
-    menuName: 'Payment History',
-  },
 ];
 
 export default adminMenu;
