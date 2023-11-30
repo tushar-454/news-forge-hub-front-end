@@ -10,13 +10,12 @@ import AllStatistics from '../Pages/AllStatistics';
 import AllUser from '../Pages/AllUser';
 import Articles from '../Pages/Articles';
 import ArticlesDetails from '../Pages/ArticlesDetails';
+import ArticlesUpdate from '../Pages/ArticlesUpdate';
 import Checkout from '../Pages/Checkout';
 import Error from '../Pages/Error';
 import Home from '../Pages/Home';
 import Login from '../Pages/Login';
 import MyArticles from '../Pages/MyArticles';
-import MyPaymentHistory from '../Pages/MyPaymentHistory';
-import MyPremiumArticles from '../Pages/MyPremiumArticles';
 import PremiumArticles from '../Pages/PremiumArticles';
 import Signup from '../Pages/Signup';
 import Subscriptions from '../Pages/Subscriptions';
@@ -177,18 +176,10 @@ const routes = createBrowserRouter([
             ),
           },
           {
-            path: 'my-premium-articles',
+            path: 'update',
             element: (
               <PrivateRoutes>
-                <MyPremiumArticles />
-              </PrivateRoutes>
-            ),
-          },
-          {
-            path: 'my-paymetn-history',
-            element: (
-              <PrivateRoutes>
-                <MyPaymentHistory />
+                <ArticlesUpdate />
               </PrivateRoutes>
             ),
           },

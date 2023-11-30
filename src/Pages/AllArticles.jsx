@@ -149,7 +149,9 @@ const AllArticles = () => {
                       <span>{article.email}</span>
                     </p>
                   </td>
-                  <td className='tableTd whitespace-nowrap'>{article.title}</td>
+                  <td className='tableTd whitespace-nowrap'>
+                    {article.title.slice(0, 30)}...
+                  </td>
                   <td className='tableTd'>{article.email}</td>
                   <td className='tableTd'>
                     {new Date(article.date).toLocaleDateString()}

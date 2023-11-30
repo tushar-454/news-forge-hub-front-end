@@ -9,6 +9,7 @@ const useUserArticles = () => {
     data: userArticles,
     isLoading,
     isError,
+    refetch,
   } = useQuery({
     queryKey: ['userArticles'],
     queryFn: async () => {
@@ -20,6 +21,7 @@ const useUserArticles = () => {
     userArticles,
     isLoading,
     isError,
+    refetch,
   };
 };
 
