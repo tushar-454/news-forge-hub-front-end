@@ -3,10 +3,12 @@ import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import ProfileModal from '../Components/Profile/ProfileModal';
 import useAuth from '../Hook/useAuth';
+import useUserInfo from '../Hook/useUserInfo';
 
 const UserProfile = () => {
   const { user, loading } = useAuth();
   const [isShowModal, setIsShowModal] = useState(false);
+  const { userInfo, isLoading } = useUserInfo();
 
   return (
     <section>
@@ -39,12 +41,22 @@ const UserProfile = () => {
                   </div>
                   {/* some user action  */}
                   <div className='my-10 flex justify-center gap-5'>
-                    <Link
-                      to={'/subscriptions'}
-                      className='bg-[#14AAF5] border-2 border-[#14AAF5] text-white text-xl font-medium p-4 px-6 rounded-lg hover:bg-[#0080CB] active:bg-white active:text-[#0080CB] transition'
-                    >
-                      Become a Premium
-                    </Link>
+                    {!isLoading && userInfo.isPremium ? (
+                      <Link
+                        to={'/premium-articles'}
+                        className='bg-[#14AAF5] border-2 border-[#14AAF5] text-white text-xl font-medium p-4 px-6 rounded-lg hover:bg-[#0080CB] active:bg-white active:text-[#0080CB] transition'
+                      >
+                        You are Premium
+                      </Link>
+                    ) : (
+                      <Link
+                        to={'/subscriptions'}
+                        className='bg-[#14AAF5] border-2 border-[#14AAF5] text-white text-xl font-medium p-4 px-6 rounded-lg hover:bg-[#0080CB] active:bg-white active:text-[#0080CB] transition'
+                      >
+                        Become a Premium
+                      </Link>
+                    )}
+
                     <button
                       onClick={() => setIsShowModal(!isShowModal)}
                       className='bg-[#796EFF] border-2 border-[#796EFF] text-white text-xl font-medium p-4 px-6 rounded-lg hover:bg-[#653DEE] active:bg-white active:text-[#653DEE] transition'

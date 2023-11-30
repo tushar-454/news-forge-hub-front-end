@@ -2,6 +2,7 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import UseAnimations from 'react-useanimations';
 import loading from 'react-useanimations/lib/loading';
 import useAuth from '../../Hook/useAuth';
@@ -15,6 +16,7 @@ const CheckoutForm = ({ totalAmount }) => {
   const stripe = useStripe();
   const elements = useElements();
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (totalAmount > 0) {
@@ -59,7 +61,36 @@ const CheckoutForm = ({ totalAmount }) => {
         if (paymentIntent.status === 'succeeded') {
           setTransactionId(paymentIntent.id);
 
-          // now save the payment in the database
+          let premiumRemainTime;
+
+          if (totalAmount === 5) {
+            const currentDate = new Date();
+            premiumRemainTime = currentDate.setMinutes(
+              currentDate.getMinutes() + 1
+            );
+          } else if (totalAmount === 35) {
+            const currentDate = new Date();
+            premiumRemainTime = currentDate.setDate(currentDate.getDate() + 7);
+          } else if (totalAmount === 150) {
+            const currentDate = new Date();
+            premiumRemainTime = currentDate.setDate(currentDate.getDate() + 30);
+          }
+          // now update user premium status
+          const res = await axios.patch(`/admin/users/${user?.email}`, {
+            isPremium: true,
+            premiumTill: premiumRemainTime,
+          });
+          if (res.data.message) {
+            toast.success(
+              `Your are now premium user till ${new Date(
+                premiumRemainTime
+              ).toLocaleString()}`,
+              { duration: 5000 }
+            );
+            navigate('/premium-articles');
+          } else {
+            toast.error('There was an error');
+          }
         }
       }
     } catch (error) {

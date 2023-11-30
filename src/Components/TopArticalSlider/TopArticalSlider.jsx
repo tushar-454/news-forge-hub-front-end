@@ -13,7 +13,11 @@ const TopArticalSlider = () => {
             <img src={article.image} className='object-cover' />
             <div className='absolute bottom-0 bg-[#00000080] text-white w-full py-2 px-2 md:py-10 md:px-2 hover:backdrop-blur-md transition'>
               <Link
-                to={'/'}
+                to={
+                  article.isPremium === 'Approved'
+                    ? '/premium-articles'
+                    : `/all-articles/articles/${article._id}`
+                }
                 className='text-lg md:text-2xl lg:text-4xl  font-bold hover:underline hover:underline-offset-4 scale-110 transition'
               >
                 {article.title}
