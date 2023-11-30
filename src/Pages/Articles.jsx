@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
 import { FaRegClock } from 'react-icons/fa6';
@@ -18,10 +18,12 @@ const Articles = () => {
   const [title, setTitle] = useState('');
   const [tags, setTags] = useState('');
   const [publication, setPublication] = useState('');
+  const [limit, setLimit] = useState(4);
   const { approvedArticles, isLoading, isError, refetch } = useApprovedArticles(
     title,
     publication,
-    tags
+    tags,
+    limit
   );
   const { publications, isLoading: publicationLoad } = usePublications();
   const { userInfo, isLoading: userLoad } = useUserInfo();
@@ -61,6 +63,42 @@ const Articles = () => {
       refetch();
     }, 0);
   };
+
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 150 && window.scrollY < 180) {
+        setLimit(8);
+        setTimeout(() => {
+          refetch();
+        }, 0);
+      }
+      if (window.scrollY > 750 && window.scrollY < 780) {
+        setLimit(12);
+        setTimeout(() => {
+          refetch();
+        }, 0);
+      }
+      if (window.scrollY > 1350 && window.scrollY < 1380) {
+        setLimit(16);
+        setTimeout(() => {
+          refetch();
+        }, 0);
+      }
+      if (window.scrollY > 1950 && window.scrollY < 1980) {
+        setLimit(20);
+        setTimeout(() => {
+          refetch();
+        }, 0);
+      }
+      if (window.scrollY > 2600 && window.scrollY < 2630) {
+        setLimit(25);
+        setTimeout(() => {
+          refetch();
+        }, 0);
+      }
+    });
+  }, []);
+
   return (
     <section>
       <Helmet>
