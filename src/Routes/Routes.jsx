@@ -15,6 +15,7 @@ import Checkout from '../Pages/Checkout';
 import Error from '../Pages/Error';
 import Home from '../Pages/Home';
 import Login from '../Pages/Login';
+import MyArticleView from '../Pages/MyArticleView';
 import MyArticles from '../Pages/MyArticles';
 import PremiumArticles from '../Pages/PremiumArticles';
 import Signup from '../Pages/Signup';
@@ -86,7 +87,7 @@ const routes = createBrowserRouter([
         path: 'my-articles',
         element: (
           <PrivateRoutes>
-            <MyArticles />
+            <MyArticleView />
           </PrivateRoutes>
         ),
       },
