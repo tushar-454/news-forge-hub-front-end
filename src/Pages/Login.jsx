@@ -109,6 +109,16 @@ const Login = () => {
           email: email,
           photo: res?.user?.photoURL,
         });
+        const response = await axios.get(`/users?email=${email}`);
+        const { premiumTill, isPremium } = response.data;
+
+        if (isPremium && premiumTill < new Date().getTime()) {
+          await axios.patch(`/users?email=${email}`, {
+            isPremium: false,
+            premiumTill: 0,
+          });
+          toast.success('Your are not premium now');
+        }
         navigate(state || '/');
       }
     } catch (error) {
