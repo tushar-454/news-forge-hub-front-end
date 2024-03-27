@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
 import { FaRegClock } from 'react-icons/fa6';
@@ -18,15 +18,11 @@ const Articles = () => {
   const [title, setTitle] = useState('');
   const [tags, setTags] = useState('');
   const [publication, setPublication] = useState('');
-  const [limit, setLimit] = useState(4);
   const { approvedArticles, isLoading, isError, refetch } = useApprovedArticles(
     title,
     publication,
-    tags,
-    limit
+    tags
   );
-  const { approvedArticles: allArticles, isLoading: allArticleLoad } =
-    useApprovedArticles();
   const { publications, isLoading: publicationLoad } = usePublications();
   const { userInfo, isLoading: userLoad } = useUserInfo();
   // handle title search
@@ -66,41 +62,6 @@ const Articles = () => {
     }, 0);
   };
 
-  useEffect(() => {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 150 && window.scrollY < 180) {
-        setLimit(8);
-        setTimeout(() => {
-          refetch();
-        }, 0);
-      }
-      if (window.scrollY > 750 && window.scrollY < 780) {
-        setLimit(12);
-        setTimeout(() => {
-          refetch();
-        }, 0);
-      }
-      if (window.scrollY > 1350 && window.scrollY < 1380) {
-        setLimit(16);
-        setTimeout(() => {
-          refetch();
-        }, 0);
-      }
-      if (window.scrollY > 1950 && window.scrollY < 1980) {
-        setLimit(20);
-        setTimeout(() => {
-          refetch();
-        }, 0);
-      }
-      if (window.scrollY > 2600 && window.scrollY < 2630) {
-        setLimit(!allArticleLoad && allArticles.length);
-        setTimeout(() => {
-          refetch();
-        }, 0);
-      }
-    });
-  }, []);
-
   return (
     <section>
       <Helmet>
@@ -119,7 +80,10 @@ const Articles = () => {
                 name={'title'}
                 onChange={resetSearch}
               />
-              <Button type='submit' displayName={'Search'} />
+              <Button
+                type='submit'
+                displayName={'Search'}
+              />
             </form>
           </div>
           <div className='flex flex-col items-center'>
@@ -131,7 +95,10 @@ const Articles = () => {
                 name={'tags'}
                 onChange={resetSearch}
               />
-              <Button displayName={'Search'} type={'submit'} />
+              <Button
+                displayName={'Search'}
+                type={'submit'}
+              />
             </form>
           </div>
           <div>
@@ -154,7 +121,10 @@ const Articles = () => {
                 )}
                 {!publicationLoad &&
                   publications.map((publication, index) => (
-                    <option key={index} value={publication.publicationName}>
+                    <option
+                      key={index}
+                      value={publication.publicationName}
+                    >
                       {publication.publicationName}
                     </option>
                   ))}
@@ -181,7 +151,10 @@ const Articles = () => {
                 >
                   {article.isPremium === 'Approved' && (
                     <span className='absolute -top-5 -right-5'>
-                      <img src={premium} className='w-20' />
+                      <img
+                        src={premium}
+                        className='w-20'
+                      />
                     </span>
                   )}
                   <div>

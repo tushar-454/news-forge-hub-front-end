@@ -109,7 +109,10 @@ const AllArticles = () => {
       <PageTitle>All Articles</PageTitle>
       {/* all article tables  */}
       <div className='overflow-auto'>
-        <table border={'1'} className='w-full border'>
+        <table
+          border={'1'}
+          className='w-full border'
+        >
           <thead>
             <tr className='bg-[#e3efff]'>
               <th className='tableTh'>No</th>
@@ -128,14 +131,20 @@ const AllArticles = () => {
             {isError && toast.error('There was an error.')}
             {!isLoading && allArticles.length === 0 && (
               <tr>
-                <td colSpan={6} className='text-center'>
+                <td
+                  colSpan={6}
+                  className='text-center'
+                >
                   No Publication found
                 </td>
               </tr>
             )}
             {!isLoading &&
               allArticles?.map((article, index) => (
-                <tr key={index} className='bg-[#ecf4ff]'>
+                <tr
+                  key={index}
+                  className='bg-[#ecf4ff]'
+                >
                   <td className='tableTd'>{++index}</td>
                   <td className='tableTd flex gap-3 items-center'>
                     <p className='w-12'>
